@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idRLSlider"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+   <TextView
+       android:id="@+id/idTVSliderTitle"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="20dp"
+       android:paddingTop="200dp"
+       android:text="@string/slide1_nadpis"
+       android:textAlignment="center"
+       android:textColor="@color/black"
+       android:textSize="20sp"
+       android:textStyle="bold"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <TextView
+       android:id="@+id/idTVSliderDescription"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="20dp"
+       android:text="@string/slide1_caption"
+       android:textAlignment="center"
+       android:textColor="@color/black"
+       android:textSize="15sp"
+       app:layout_constraintTop_toBottomOf="@+id/idTVSliderTitle"
+       tools:layout_editor_absoluteX="20dp" />
+
+   <EditText
+       android:id="@+id/input_meno"
+       android:layout_width="match_parent"
+       android:layout_height="45dp"
+       android:layout_margin="50dp"
+       android:backgroundTint="@color/cervena_tmava"
+       android:hint="@string/enter_your_name"
+       android:textColorHint="@color/cervena_tmava_zosvetlena"
+       android:textSize="20sp"
+       android:textColor="@color/black"
+       android:inputType="textNoSuggestions"
+       app:layout_constraintBottom_toTopOf="@+id/idIVSlider"
+       app:layout_constraintTop_toBottomOf="@+id/idTVSliderTitle" />
+
+   <LinearLayout
+       android:id="@+id/notificationOptions"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@android:color/transparent"
+       android:orientation="horizontal"
+       android:weightSum="3"
+       app:layout_constraintBottom_toTopOf="@+id/idIVSlider"
+       app:layout_constraintTop_toBottomOf="@+id/idTVSliderTitle">
+
+      <View
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_weight="1" />
+
+      <Button
+          android:id="@+id/idBtnTurnOn"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:layout_weight="1"
+          android:backgroundTint="@color/cervena_tmava"
+          android:padding="4dp"
+          android:text="@string/turn_on"
+          android:textAllCaps="false"
+          android:textColor="@color/white" />
+
+      <View
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_weight="1" />
+
+
+   </LinearLayout>
+
+   <!--Image view for displaying
+        our slider image-->
+   <ImageView
+       android:id="@+id/idIVSlider"
+       android:layout_width="200dp"
+       android:layout_height="200dp"
+       android:src="@drawable/welcome"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/idTVSliderDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

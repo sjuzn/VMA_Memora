@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name" translatable="false">Memora</string>
+    <string name="skip">Skip</string>
+
+    <string name="slide1_nadpis">Welcome to Memora</string>
+    <string name="slide1_caption">Discover a new way to capture, share, and relive your most cherished memories. Our app allows you to easily document life\'s special moments, whether big or small, and share them with friends and family.</string>
+
+    <string name="slide2_nadpis">What is your name?</string>
+    <string name="slide2_caption"> </string>
+
+    <string name="slide3_nadpis">Turn on notifications</string>
+    <string name="slide3_caption">Receive notfications to get reminded about your anniversaries. We promise not to spam you.</string>
+
+    <string name="slide4_nadpis">Almost there</string>
+    <string name="slide4_caption">Logging in is key to securing your account. Without it, you may risk losing access. Register today!</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="turn_on">Turn on</string>
+
+    <string name="name">name</string>
+
+</resources>
