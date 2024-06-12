@@ -3,6 +3,7 @@ package sk.upjs.druhypokus.intro
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,17 +66,13 @@ class SliderAdapter(
         if(position != 2){
             notifyOptions.visibility = View.GONE
         }
+
         if(position == 2) {
             var allowNotifyBtn: Button = view.findViewById(R.id.idBtnTurnOn)
 
             allowNotifyBtn.setOnClickListener{
                 ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
             }
-
-            val sharedPref: SharedPreferences = (context as Activity).getPreferences(AppCompatActivity.MODE_PRIVATE)
-            val editor = sharedPref.edit()
-            editor.putString(context.resources.getString(R.string.name), menoInput.text.toString())
-            editor.apply()
         }
 
         // on below line we are adding our view to container.

@@ -12,4 +12,6 @@
 
     <color name="cervena_tmava">#951d1d</color>
     <color name="cervena_tmava_zosvetlena">#e4c6c6</color>
+
+    <color name="semi_transparent">#00000000</color>
 </resources>

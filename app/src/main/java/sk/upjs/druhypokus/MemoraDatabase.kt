@@ -9,6 +9,8 @@ import androidx.room.TypeConverters
 import kotlinx.coroutines.CoroutineScope
 import sk.upjs.druhypokus.dao.MilestonesDao
 import sk.upjs.druhypokus.entity.Milestone
+import java.sql.Date
+import java.text.SimpleDateFormat
 import java.util.UUID
 
 @Database(entities = [Milestone::class], version = 1, exportSchema = false)
@@ -36,7 +38,6 @@ abstract class MemoraDatabase : RoomDatabase() {
 }
 
 class UuidConverter {
-
     @TypeConverter
     fun uuidToString(uuid: UUID) = uuid.toString()
 

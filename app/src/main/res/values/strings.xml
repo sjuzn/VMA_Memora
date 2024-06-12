@@ -18,4 +18,19 @@
 
     <string name="name">name</string>
 
+    <string name="navigation_drawer_close">Close</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="menu_milestones">Milestones</string>
+    <string name="menu_moments">Moments</string>
+    <string name="menu_capsules">Time capsules</string>
+    <string name="menu_list" translatable="false">Bucket list</string>
+    <string name="menu_memo">Memo notes</string>
+    <string name="menu_calendar">Calendar</string>
+    <string name="menu_invite">Person invite</string>
+    <string name="menu_settings">Settings</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

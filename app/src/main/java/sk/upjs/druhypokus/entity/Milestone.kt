@@ -9,7 +9,7 @@ import java.util.UUID
 @Entity(tableName = "milestones")
 data class Milestone(
     val typ: String,
-    val datum: Date,
+    val datum: String,
     val nSuradnica: Float,
     val eSuradnica: Float,
     val fotka: String,

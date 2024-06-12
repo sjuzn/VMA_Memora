@@ -2,7 +2,10 @@ package sk.upjs.druhypokus.intro
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -45,6 +48,7 @@ class IntroSliderActivity : AppCompatActivity() {
             // on below line we are opening a new activity
             val i = Intent(this@IntroSliderActivity, MainActivity::class.java)
             startActivity(i)
+            finish()
         }
 
         // on below line we are initializing our slider list.

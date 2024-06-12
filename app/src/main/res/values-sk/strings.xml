@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="skip">Preskočiť</string>
+    <string name="skip">Domov</string>
     <string name="slide1_nadpis">Vitajte v Memore</string>
     <string name="slide1_caption">Objavte nový spôsob, ako zachytiť, zdieľať a znovu prežiť svoje najcennejšie spomienky. Naša aplikácia vám umožňuje jednoducho zdokumentovať výnimočné okamihy života, či už veľké alebo malé, a zdieľať ich s priateľmi a rodinou.</string>
     <string name="slide2_nadpis">Aké je vaše meno?</string>
@@ -12,4 +12,14 @@
     <string name="enter_your_name">Meno</string>
     <string name="turn_on">Zapnúť</string>
     <string name="name">meno</string>
+
+    <string name="navigation_drawer_close">Zatvorené</string>
+    <string name="navigation_drawer_open">Otvorené</string>
+    <string name="menu_milestones">Míľniky</string>
+    <string name="menu_moments">Momenty</string>
+    <string name="menu_capsules">Časové kapsuly</string>
+    <string name="menu_memo">Poznámky</string>
+    <string name="menu_calendar">Kalendár</string>
+    <string name="menu_invite">Pozvať osobu</string>
+    <string name="menu_settings">Nastavenia</string>
 </resources>
