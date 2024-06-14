@@ -22,4 +22,14 @@
     <string name="menu_calendar">Kalendár</string>
     <string name="menu_invite">Pozvať osobu</string>
     <string name="menu_settings">Nastavenia</string>
+    <string name="add">Pridať</string>
+    <string name="edit">Upraviť</string>
+    <string name="delete">Odstrániť</string>
+    <string name="order">Poradie</string>
+    <string name="delete_error">Nie je čo vymazať!</string>
+    <string name="edit_error">Nie je čo upraviť!</string>
+    <string name="yes">Áno</string>
+    <string name="no">Nie</string>
+    <string name="confirm">Potvrdiť</string>
+    <string name="sure">Isto iste?</string>
 </resources>

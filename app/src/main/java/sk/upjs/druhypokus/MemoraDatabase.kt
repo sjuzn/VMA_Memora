@@ -7,10 +7,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import kotlinx.coroutines.CoroutineScope
-import sk.upjs.druhypokus.dao.MilestonesDao
-import sk.upjs.druhypokus.entity.Milestone
-import java.sql.Date
-import java.text.SimpleDateFormat
+import sk.upjs.druhypokus.milniky.MilestonesDao
+import sk.upjs.druhypokus.milniky.Milestone
 import java.util.UUID
 
 @Database(entities = [Milestone::class], version = 1, exportSchema = false)

@@ -1,27 +1,36 @@
 package sk.upjs.druhypokus
 
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.material.navigation.NavigationView
-import sk.upjs.druhypokus.milniky.MilestonesSwipeFragment
+import sk.upjs.druhypokus.milniky.Milestone
+import sk.upjs.druhypokus.milniky.MilestonesObsluha
+import sk.upjs.druhypokus.milniky.MilestonesViewModel
 
 
 class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelectedListener  {
 
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navigationView: NavigationView
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    //private lateinit var appBarConfiguration: AppBarConfiguration
+
+    var milestoneList: List<Milestone> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val milestonesViewModel : MilestonesViewModel by viewModels {
+            MilestonesViewModel.MilestoneViewModelFactory((application as MemoraApplication).milestonesRepository)
+        }
+        milestonesViewModel.milestones.observe(this){
+            milestoneList = it
+        }
+
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -29,10 +38,18 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
         chcemToggle()
         inicializujMenu()
 
+        //https://developer.android.com/training/system-ui/navigation#kotlin
+        window.decorView.apply {
+            // Hide both the navigation bar and the status bar.
+            // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+            // a general rule, you should design your app to hide the status bar whenever you
+            // hide the navigation bar.
+            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+        }
     }
 
     private fun chcemToggle(){
-        drawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawer_layout5)
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -51,33 +68,24 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        val fragment = vyberFragment(menuItem)
-        ukazFragment(fragment)
+        vyberUdalost(menuItem)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
-    private fun vyberFragment(menuItem: MenuItem): Fragment {
-        return when (menuItem.itemId) {
-            R.id.nav_milestones -> MilestonesSwipeFragment()
-            R.id.nav_moments -> MilestonesSwipeFragment()
-            R.id.nav_capsules -> MilestonesSwipeFragment()
-            R.id.nav_list -> MilestonesSwipeFragment()
-            R.id.nav_memo -> MilestonesSwipeFragment()
-            R.id.nav_calendar -> MilestonesSwipeFragment()
-            R.id.nav_invite -> MilestonesSwipeFragment()
-            R.id.nav_settings -> MilestonesSwipeFragment()
-
+    private fun vyberUdalost(menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.nav_milestones -> MilestonesObsluha(this.findViewById<View?>(android.R.id.content).rootView as View, this, milestoneList).obsluhaMilestone()
+            /*R.id.nav_moments -> MilestonesSwipeFragment(this, milestoneList)
+            R.id.nav_capsules -> MilestonesSwipeFragment(this, milestoneList)
+            R.id.nav_list -> MilestonesSwipeFragment(this, milestoneList)
+            R.id.nav_memo -> MilestonesSwipeFragment(this, milestoneList)
+            R.id.nav_calendar -> MilestonesSwipeFragment(this, milestoneList)
+            R.id.nav_invite -> MilestonesSwipeFragment(this, milestoneList)
+            R.id.nav_settings -> MilestonesSwipeFragment(this, milestoneList)
+*/
             else -> throw IllegalArgumentException("menu option not implemented!!")
         }
-    }
-
-    private fun ukazFragment(fragment : Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.nav_enter, R.anim.nav_exit)
-            .replace(R.id.container_fragment, fragment)
-            .commit()
     }
 
     @Deprecated("Deprecated in Java")

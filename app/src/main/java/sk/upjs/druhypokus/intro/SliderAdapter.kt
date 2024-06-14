@@ -2,7 +2,8 @@ package sk.upjs.druhypokus.intro
 
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.PagerAdapter
+import sk.upjs.druhypokus.PrefSingleton
 import sk.upjs.druhypokus.R
 
 class SliderAdapter(
@@ -68,11 +69,23 @@ class SliderAdapter(
         }
 
         if(position == 2) {
-            var allowNotifyBtn: Button = view.findViewById(R.id.idBtnTurnOn)
-
-            allowNotifyBtn.setOnClickListener{
+            //var allowNotifyBtn: Button = view.findViewById(R.id.idBtnTurnOn)
+            (view.findViewById(R.id.idBtnTurnOn) as Button).setOnClickListener{
                 ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
             }
+        }
+
+        if(position == 1){
+            var menoInput : EditText = view.findViewById(R.id.input_meno)
+            menoInput.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    PrefSingleton.getInstance().writePreference("meno", menoInput.text.toString());
+                    Log.d("SHARED PREF FUNGUJE", PrefSingleton.getInstance().getPreferenceString("meno"))
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            })
         }
 
         // on below line we are adding our view to container.
@@ -87,5 +100,4 @@ class SliderAdapter(
         // which is use to remove a view.
         container.removeView(`object` as ConstraintLayout)
     }
-
 }

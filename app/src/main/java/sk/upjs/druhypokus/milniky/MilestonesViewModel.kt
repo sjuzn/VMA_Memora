@@ -1,12 +1,10 @@
-package sk.upjs.druhypokus.viewModel
+package sk.upjs.druhypokus.milniky
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import sk.upjs.druhypokus.entity.Milestone
-import sk.upjs.druhypokus.repository.MilestonesRepository
 
 class MilestonesViewModel (private val repository: MilestonesRepository) : ViewModel() {
 
@@ -18,6 +16,12 @@ class MilestonesViewModel (private val repository: MilestonesRepository) : ViewM
         }
     }
 
+    fun insert(milestone: Milestone) {
+        viewModelScope.launch {
+            repository.insert(milestone)
+        }
+    }
+
     class MilestoneViewModelFactory(private val repository: MilestonesRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MilestonesViewModel::class.java)) {
@@ -26,5 +30,4 @@ class MilestonesViewModel (private val repository: MilestonesRepository) : ViewM
             throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
-
 }

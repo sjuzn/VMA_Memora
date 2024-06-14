@@ -1,12 +1,11 @@
-package sk.upjs.druhypokus.dao
+package sk.upjs.druhypokus.milniky
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import sk.upjs.druhypokus.entity.Milestone
+import sk.upjs.druhypokus.milniky.Milestone
 import java.util.UUID
 import kotlinx.coroutines.flow.Flow
 

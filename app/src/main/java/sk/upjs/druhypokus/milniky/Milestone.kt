@@ -1,4 +1,4 @@
-package sk.upjs.druhypokus.entity
+package sk.upjs.druhypokus.milniky
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,8 +10,6 @@ import java.util.UUID
 data class Milestone(
     val typ: String,
     val datum: String,
-    val nSuradnica: Float,
-    val eSuradnica: Float,
     val fotka: String,
     val zucastneni: String
 ) : Serializable{

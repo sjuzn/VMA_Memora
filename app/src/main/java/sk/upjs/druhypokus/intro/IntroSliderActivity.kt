@@ -2,10 +2,7 @@ package sk.upjs.druhypokus.intro
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -32,8 +29,9 @@ class IntroSliderActivity : AppCompatActivity() {
     lateinit var indicatorSlideThreeTV: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_intro_slider)
 
         // on below line we are initializing all
         // our variables with their ids.
@@ -90,9 +88,6 @@ class IntroSliderActivity : AppCompatActivity() {
         // on below line we are adding page change
         // listener for our view pager.
         viewPager.addOnPageChangeListener(viewListener)
-
-        //ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
-
     }
 
     // creating a method for view pager for on page change listener.

@@ -1,7 +1,7 @@
 package sk.upjs.druhypokus
 
 import android.app.Application
-import sk.upjs.druhypokus.repository.MilestonesRepository
+import sk.upjs.druhypokus.milniky.MilestonesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
