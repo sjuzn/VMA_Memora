@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".milniky.MilestoneEditFragment"
+    android:padding="40dp"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/bType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:text="Type"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/milestones_smaller"
+        android:gravity="start|center_vertical"
+        android:background="@drawable/button_milestones"
+        android:backgroundTint="@color/cervena_tmava_zosvetlena"/>
+
+    <Button
+        android:id="@+id/bDate"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:text="Datum"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/calendar_smaller"
+        android:gravity="start|center_vertical"
+        android:background="@drawable/button_milestones"
+        android:backgroundTint="@color/cervena_tmava_zosvetlena"/>
+
+    <Button
+        android:id="@+id/bPhoto"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:text="@string/choose_another"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/moments_smaller"
+        android:gravity="start|center_vertical"
+        android:background="@drawable/button_milestones" />
+
+    <Button
+        android:id="@+id/bWho"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:text="Kto"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/invite_smaller"
+        android:gravity="start|center_vertical"
+        android:background="@drawable/button_milestones"
+        android:backgroundTint="@color/cervena_tmava_zosvetlena"/>
+
+</LinearLayout>

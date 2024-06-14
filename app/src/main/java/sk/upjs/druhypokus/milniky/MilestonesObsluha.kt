@@ -4,6 +4,7 @@ import android.app.AlertDialog.Builder
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.drawable.BitmapDrawable
 import android.util.Base64
@@ -18,6 +19,7 @@ import androidx.viewpager.widget.ViewPager
 import sk.upjs.druhypokus.MemoraApplication
 import sk.upjs.druhypokus.R
 import java.io.ByteArrayOutputStream
+import java.io.Serializable
 
 
 class MilestonesObsluha(
@@ -69,15 +71,11 @@ class MilestonesObsluha(
                     R.id.edit -> {
                         if(milestoneList.isEmpty()){
                             Toast.makeText(cntx, R.string.edit_error, Toast.LENGTH_LONG).show()
-                        }
-                        true
-                    }
-
-                    R.id.delete -> {
-                        if(milestoneList.isEmpty()){
-                            Toast.makeText(cntx, R.string.delete_error, Toast.LENGTH_LONG).show()
                         }else{
-                            opytajSA()
+                            val intent = Intent(cntx, MilestonesAkcieActivity::class.java)
+                            intent.putExtra("TLACIDLO", "edit")
+                            intent.putExtra("MILESTONE", (milestoneList[pozicia] as Serializable?))
+                            cntx.startActivity(intent)
                         }
                         true
                     }

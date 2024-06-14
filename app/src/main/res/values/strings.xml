@@ -41,5 +41,6 @@
     <string name="no">No</string>
     <string name="confirm">Confirm</string>
     <string name="sure">Are you sure?</string>
+    <string name="choose_another">Choose another</string>
 
 </resources>
