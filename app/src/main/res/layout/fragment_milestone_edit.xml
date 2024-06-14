@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".milniky.MilestoneEditFragment"
     android:padding="40dp"
     android:backgroundTint="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
     <Button
         android:id="@+id/bType"
@@ -61,5 +63,13 @@
         android:gravity="start|center_vertical"
         android:background="@drawable/button_milestones"
         android:backgroundTint="@color/cervena_tmava_zosvetlena"/>
+
+    <Button
+        android:id="@+id/btDel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/cervena_tmava"/>
 
 </LinearLayout>
