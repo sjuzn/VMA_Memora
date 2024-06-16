@@ -8,10 +8,10 @@ import java.util.UUID
 
 @Entity(tableName = "milestones")
 data class Milestone(
-    val typ: String,
-    val datum: String,
-    val fotka: String,
-    val zucastneni: String
+    var typ: String,
+    var datum: String,
+    var fotka: String,
+    var zucastneni: String
 ) : Serializable{
 
     @PrimaryKey

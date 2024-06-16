@@ -16,7 +16,7 @@
         android:theme="@style/Theme.DruhyPokus"
         tools:targetApi="31">
         <activity
-            android:name=".milniky.MilestonesAkcieActivity"
+            android:name=".milniky.crud.MilestonesAkcieActivity"
             android:exported="false" />
 
         <service android:name=".BackgroundSoundService" />

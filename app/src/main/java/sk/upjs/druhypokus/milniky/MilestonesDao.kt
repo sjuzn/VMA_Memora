@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import sk.upjs.druhypokus.milniky.Milestone
 import java.util.UUID
 import kotlinx.coroutines.flow.Flow
@@ -26,4 +27,7 @@ interface MilestonesDao {
 
     @Query("DELETE FROM milestones WHERE uuid=:uuid")
     suspend fun delete(uuid: UUID)
+
+    @Update
+    suspend fun update(milestone: Milestone)
 }

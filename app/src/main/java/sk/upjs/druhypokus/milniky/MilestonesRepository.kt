@@ -30,4 +30,8 @@ class MilestonesRepository(private val milestonesDao: MilestonesDao) {
         milestonesDao.delete(milestone)
     }
 
+    suspend fun update(milestone: Milestone) {
+        milestonesDao.update(milestone)
+    }
+
 }

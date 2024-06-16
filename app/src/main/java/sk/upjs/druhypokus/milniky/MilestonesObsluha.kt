@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
 import sk.upjs.druhypokus.MemoraApplication
 import sk.upjs.druhypokus.R
+import sk.upjs.druhypokus.milniky.crud.MilestonesAkcieActivity
 import java.io.ByteArrayOutputStream
 import java.io.Serializable
 
@@ -52,19 +53,10 @@ class MilestonesObsluha(
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when(menuItem.itemId){
                     R.id.add -> {
-                        Toast.makeText(cntx, "You Clicked " + menuItem.title, Toast.LENGTH_SHORT).show()
-                        val milestonesViewModel : MilestonesViewModel by activity.viewModels {
-                            MilestonesViewModel.MilestoneViewModelFactory((activity.application as MemoraApplication).milestonesRepository)
-                        }
-
-                        val stream = ByteArrayOutputStream()
-                        val drawable = cntx.resources.getDrawable(R.drawable.test)
-                        (drawable as BitmapDrawable).bitmap.compress(CompressFormat.JPEG, 70, stream)
-                        val byteFormat = stream.toByteArray()
-                        val imgString: String = Base64.encodeToString(byteFormat, Base64.NO_WRAP)
-
-
-                        milestonesViewModel.insert(Milestone("Narodenie", "2024-06-01", imgString, "Ja a Sophia"))
+                        val intent = Intent(cntx, MilestonesAkcieActivity::class.java)
+                        intent.putExtra("TLACIDLO", "add")
+                        intent.putExtra("MILESTONE", Milestone("","","",""))
+                        cntx.startActivity(intent)
                         true
                     }
 

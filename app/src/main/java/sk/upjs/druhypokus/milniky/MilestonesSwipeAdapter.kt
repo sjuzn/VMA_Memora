@@ -2,16 +2,19 @@ package sk.upjs.druhypokus.milniky
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.util.Base64
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import sk.upjs.druhypokus.R
+import java.io.FileNotFoundException
+import java.io.InputStream
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -46,20 +49,30 @@ class MilestonesSwipeAdapter (
 
 
         //a potom naplnim data
-        val milestoneData: Milestone = milestoneList.get(position)
-
-        //obrazok
-        val imageBytes = Base64.decode(milestoneData.fotka, Base64.NO_WRAP)
-        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-        milestoneParent.setBackgroundDrawable(BitmapDrawable(decodedImage))
-
+        val milestoneData: Milestone = milestoneList[position]
         ktoText.text = milestoneData.zucastneni
         coAkedyText.text = milestoneData.typ + " | " + milestoneData.datum
+        kolkoUbehlo.text = ChronoUnit.DAYS.between(LocalDate.parse(milestoneData.datum, DateTimeFormatter.ofPattern("yyyy-MM-dd")), LocalDate.now()).toString() + context.getString(R.string.days)
 
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val eventDate = LocalDate.parse(milestoneData.datum, formatter)
-        val currentDate = LocalDate.now()
-        kolkoUbehlo.text = ChronoUnit.DAYS.between(eventDate, currentDate).toString()
+        //obrazok
+        //val path: Uri = Uri.parse(milestoneData.fotka)
+        //val iv : ImageView = ImageView(context)
+        //iv.setImageURI(path)
+        //val d = Drawable.createFromPath(milestoneData.fotka);
+        //milestoneParent.background = d;
+        val milestoneUri = Uri.parse(milestoneData.fotka)
+        var yourDrawable : Drawable?
+        try {
+            val inputStream = context.contentResolver.openInputStream(milestoneUri)
+            yourDrawable = Drawable.createFromStream(inputStream, milestoneUri.toString())
+            // Tu by ste mali mať načítaný obrázok z URI
+        } catch (e: FileNotFoundException) {
+            // V prípade, že súbor na zadanom URI neexistuje, použite fallback na predvolený obrázok
+            yourDrawable = ContextCompat.getDrawable(context, R.drawable.test)
+        }
+
+        milestoneParent.setBackgroundDrawable(yourDrawable)
+
 
         container.addView(view)
         return view

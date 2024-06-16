@@ -1,4 +1,4 @@
-package sk.upjs.druhypokus.milniky
+package sk.upjs.druhypokus.milniky.crud
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import sk.upjs.druhypokus.MainActivity
 import sk.upjs.druhypokus.R
+import sk.upjs.druhypokus.milniky.Milestone
 
 class MilestonesAkcieActivity : AppCompatActivity() {
 
@@ -45,7 +46,10 @@ class MilestonesAkcieActivity : AppCompatActivity() {
                 nadpis.text = getString(R.string.edit)
                 MilestoneEditFragment.newInstance(milestone)
             }
-           // "add" -> MilestoneAddFragment()
+            "add" -> {
+                nadpis.text = getString(R.string.add)
+                MilestoneAddFragment.newInstance()
+            }
             //"order" -> MilestoneOrderFragment()
             else -> throw IllegalArgumentException("menu option not implemented!!") // Default fragment
         }

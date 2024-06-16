@@ -33,4 +33,13 @@
     <string name="confirm">Potvrdiť</string>
     <string name="sure">Isto iste?</string>
     <string name="choose_another">Vybrať nú</string>
+    <string name="welcome">Vitaj! Radi ťa tu vidíme </string>
+    <string name="choose_type">Zvoľ typ</string>
+    <string name="select_the_date">Vyber dátum</string>
+    <string name="select_picture">Vyber fotku</string>
+    <string name="choose_participants">Kto bol prítomný?</string>
+    <string name="save">Uložiť</string>
+    <string name="days">" dní"</string>
+    <string name="warning">Upozornenie</string>
+    <string name="unfilled">Niektoré polia nie sú vyplnené</string>
 </resources>

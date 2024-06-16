@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".milniky.crud.MilestoneEditFragment"
+    tools:context=".milniky.crud.MilestonesAkcieActivity"
     android:padding="40dp"
     android:orientation="vertical"
     android:gravity="center_horizontal"
@@ -15,13 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="7dp"
-        android:text="Type"
+        android:hint="@string/choose_type"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:drawableLeft="@drawable/milestones_smaller"
         android:gravity="start|center_vertical"
         android:background="@drawable/button_milestones"
-        android:backgroundTint="@color/cervena_tmava_zosvetlena"/>
+        />
 
     <Button
         android:id="@+id/bDate"
@@ -29,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="7dp"
-        android:text="Datum"
+        android:hint="@string/select_the_date"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:drawableLeft="@drawable/calendar_smaller"
@@ -43,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="7dp"
-        android:text="@string/choose_another"
+        android:hint="@string/select_picture"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:drawableLeft="@drawable/moments_smaller"
@@ -56,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="7dp"
-        android:text="Kto"
+        android:hint="@string/choose_participants"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:drawableLeft="@drawable/invite_smaller"
@@ -65,10 +64,10 @@
         android:backgroundTint="@color/cervena_tmava_zosvetlena"/>
 
     <Button
-        android:id="@+id/btDel"
+        android:id="@+id/btSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delete"
+        android:text="@string/save"
         android:layout_margin="20dp"
         android:backgroundTint="@color/cervena_tmava"/>
 

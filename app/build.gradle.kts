@@ -62,4 +62,7 @@ dependencies {
 
     api(libs.kotlinx.coroutines.android)
     api(libs.kotlinx.coroutines.core)
+
+    implementation (libs.lifecycle.viewmodel.ktx)
+    implementation (libs.fragment.ktx)
 }

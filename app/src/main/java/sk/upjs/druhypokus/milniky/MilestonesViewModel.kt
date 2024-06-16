@@ -22,6 +22,12 @@ class MilestonesViewModel (private val repository: MilestonesRepository) : ViewM
         }
     }
 
+    fun updateMilestone(milestone: Milestone) {
+        viewModelScope.launch {
+            repository.update(milestone)
+        }
+    }
+
     class MilestoneViewModelFactory(private val repository: MilestonesRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MilestonesViewModel::class.java)) {

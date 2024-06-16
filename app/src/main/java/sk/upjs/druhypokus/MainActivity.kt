@@ -3,6 +3,8 @@ package sk.upjs.druhypokus
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -35,6 +37,20 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        val welcomeName = findViewById<TextView>(R.id.welcomeName)
+        if(PrefSingleton.getInstance().getPreferenceString("meno") == null){
+            welcomeName.text = getString(R.string.welcome)
+        }else welcomeName.text = getString(R.string.welcome) + " " + (PrefSingleton.getInstance().getPreferenceString("meno"))
+
+        welcomeName.visibility = View.VISIBLE
+        /*
+        var btA = findViewById<ImageButton>(R.id.imageButtonEdit)
+        btA.visibility = View.GONE
+        btA = findViewById<ImageButton>(R.id.imageButtonShare)
+        btA.visibility = View.GONE
+        val a = findViewById<TextView>(R.id.poziciaText)
+        a.visibility = View.GONE
+*/
         chcemToggle()
         inicializujMenu()
 
@@ -74,6 +90,7 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
     }
 
     private fun vyberUdalost(menuItem: MenuItem) {
+
         when (menuItem.itemId) {
             R.id.nav_milestones -> MilestonesObsluha(this.findViewById<View?>(android.R.id.content).rootView as View, this, milestoneList).obsluhaMilestone()
             /*R.id.nav_moments -> MilestonesSwipeFragment(this, milestoneList)
