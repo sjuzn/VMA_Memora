@@ -12,7 +12,9 @@
     <string name="slide3_caption">Receive notfications to get reminded about your anniversaries. We promise not to spam you.</string>
 
     <string name="slide4_nadpis">Almost there</string>
-    <string name="slide4_caption">Logging in is key to securing your account. Without it, you may risk losing access. Register today!</string>
+    <string name="slide4_caption">Allow access to your files. We value your privacy and handle your data with care.</string>
+
+
     <string name="enter_your_name">Enter your name</string>
     <string name="turn_on">Turn on</string>
 
@@ -36,6 +38,8 @@
 
     <string name="delete_error">Nothing to delete!</string>
     <string name="edit_error">Nothing to edit!</string>
+    <string name="reorder_error">Nothing to reorder!</string>
+    <string name="share_error">Nothing to share!</string>
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -53,5 +57,11 @@
     <string name="days">days</string>
     <string name="warning">Warning</string>
     <string name="unfilled">You left some fields unfilled</string>
+    <string name="hi">Hi</string>
+    <string name="todays_anniversaries">Todays anniversaries</string>
+    <string name="upcoming_anniversary">Upcoming anniversary</string>
+    <string name="no_upcoming_anniversary">No anniversary</string>
+    <string name="try_to_add">Try to add some milestone first</string>
+
 
 </resources>

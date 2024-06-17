@@ -55,24 +55,19 @@ class MilestonesSwipeAdapter (
         kolkoUbehlo.text = ChronoUnit.DAYS.between(LocalDate.parse(milestoneData.datum, DateTimeFormatter.ofPattern("yyyy-MM-dd")), LocalDate.now()).toString() + context.getString(R.string.days)
 
         //obrazok
-        //val path: Uri = Uri.parse(milestoneData.fotka)
-        //val iv : ImageView = ImageView(context)
-        //iv.setImageURI(path)
-        //val d = Drawable.createFromPath(milestoneData.fotka);
-        //milestoneParent.background = d;
+        /*
         val milestoneUri = Uri.parse(milestoneData.fotka)
-        var yourDrawable : Drawable?
-        try {
+        val yourDrawable : Drawable? = try {
             val inputStream = context.contentResolver.openInputStream(milestoneUri)
-            yourDrawable = Drawable.createFromStream(inputStream, milestoneUri.toString())
+            Drawable.createFromStream(inputStream, milestoneUri.toString())
             // Tu by ste mali mať načítaný obrázok z URI
         } catch (e: FileNotFoundException) {
             // V prípade, že súbor na zadanom URI neexistuje, použite fallback na predvolený obrázok
-            yourDrawable = ContextCompat.getDrawable(context, R.drawable.test)
+            ContextCompat.getDrawable(context, R.drawable.poadie_abstract)
         }
 
         milestoneParent.setBackgroundDrawable(yourDrawable)
-
+*/
 
         container.addView(view)
         return view

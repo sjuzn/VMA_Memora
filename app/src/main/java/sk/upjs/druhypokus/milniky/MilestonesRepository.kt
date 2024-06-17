@@ -16,7 +16,7 @@ class MilestonesRepository(private val milestonesDao: MilestonesDao) {
 
     val milestones = milestonesDao.getAllMilestones()
     lateinit var milestone : Milestone
-    lateinit var milestoneList: ArrayList<Milestone>
+    lateinit var milestoneList: List<Milestone>
 
     suspend fun getByUuid(uuid: UUID) {
         milestone = milestonesDao.getByUuid(uuid).first()
@@ -26,8 +26,17 @@ class MilestonesRepository(private val milestonesDao: MilestonesDao) {
         milestonesDao.insert(milestone)
     }
 
+    suspend fun replaceAll(milestone : List<Milestone>){
+        deleteAll()
+        milestonesDao.insert(milestone)
+    }
+
     suspend fun delete(milestone: Milestone) {
         milestonesDao.delete(milestone)
+    }
+
+    suspend fun deleteAll() {
+        milestonesDao.deleteAll()
     }
 
     suspend fun update(milestone: Milestone) {

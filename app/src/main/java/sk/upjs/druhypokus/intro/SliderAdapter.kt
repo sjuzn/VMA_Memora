@@ -64,14 +64,21 @@ class SliderAdapter(
         if(position != 1){
             menoInput.visibility = View.GONE
         }
-        if(position != 2){
+        if((position != 2) and (position != 3)){
             notifyOptions.visibility = View.GONE
         }
 
         if(position == 2) {
             //var allowNotifyBtn: Button = view.findViewById(R.id.idBtnTurnOn)
-            (view.findViewById(R.id.idBtnTurnOn) as Button).setOnClickListener{
+            (view.findViewById<Button>(R.id.idBtnTurnOn)!!).setOnClickListener{
                 ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
+            }
+        }
+
+        if(position == 3) {
+            //var allowNotifyBtn: Button = view.findViewById(R.id.idBtnTurnOn)
+            (view.findViewById<Button>(R.id.idBtnTurnOn)!!).setOnClickListener{
+                ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES), 1)
             }
         }
 

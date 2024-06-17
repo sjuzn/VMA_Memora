@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="4">
 
             <!--on below line we are creating a text view
                 for displaying our dots-->
@@ -88,6 +88,19 @@
                 for displaying our dots-->
             <TextView
                 android:id="@+id/idTVSlideThree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:text="•"
+                android:textAlignment="center"
+                android:textColor="@color/cervena_tmava_zosvetlena"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/idTVSlideFour"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

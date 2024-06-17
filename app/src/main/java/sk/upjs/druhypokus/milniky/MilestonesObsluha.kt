@@ -1,25 +1,19 @@
 package sk.upjs.druhypokus.milniky
 
-import android.app.AlertDialog.Builder
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap.CompressFormat
-import android.graphics.drawable.BitmapDrawable
-import android.util.Base64
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
-import sk.upjs.druhypokus.MemoraApplication
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.milniky.crud.MilestonesAkcieActivity
-import java.io.ByteArrayOutputStream
 import java.io.Serializable
 
 
@@ -33,13 +27,13 @@ class MilestonesObsluha(
     val activity = cntx as FragmentActivity
     fun obsluhaMilestone(){
 
-        var  viewPager: ViewPager = currView.findViewById(R.id.container_pages)
-        var milestonesAdapter = MilestonesSwipeAdapter(cntx,milestoneList)
+        val viewPager: ViewPager = currView.findViewById(R.id.container_pages)
+        val milestonesAdapter = MilestonesSwipeAdapter(cntx,milestoneList)
         viewPager.adapter = milestonesAdapter
         viewPager.addOnPageChangeListener(viewListener)
 
-        var btEdit = currView.findViewById<ImageButton>(R.id.imageButtonEdit)
-        var btShare = currView.findViewById<ImageButton>(R.id.imageButtonShare)
+        val btEdit = currView.findViewById<ImageButton>(R.id.imageButtonEdit)
+        val btShare = currView.findViewById<ImageButton>(R.id.imageButtonShare)
         currView.findViewById<TextView>(R.id.poziciaText).text = ("1").plus("/").plus(milestoneList.size)
 
         //https://www.geeksforgeeks.org/popup-menu-in-android-with-example/
@@ -73,10 +67,17 @@ class MilestonesObsluha(
                     }
 
                     R.id.order -> {
-                        Toast.makeText(cntx, "You Clicked " + menuItem.title, Toast.LENGTH_SHORT).show()
+                        if(milestoneList.isEmpty()){
+                            Toast.makeText(cntx, R.string.reorder_error, Toast.LENGTH_LONG).show()
+                        }else{
+                            val intent = Intent(cntx, MilestonesAkcieActivity::class.java)
+                            intent.putExtra("TLACIDLO", "order")
+                            intent.putExtra("MILESTONE", Milestone("","","",""))
+                            cntx.startActivity(intent)
+                        }
                         true
                     }
-                else -> throw IllegalArgumentException("menu option not implemented!!")
+                else -> throw IllegalArgumentException("menu option not implemented!!!")
                 }
 
             }
@@ -85,8 +86,40 @@ class MilestonesObsluha(
         }
 
         btShare.setOnClickListener{
-            Toast.makeText(cntx, "Share klik", Toast.LENGTH_SHORT).show()
+            if(milestoneList.isEmpty())
+                Toast.makeText(cntx, R.string.share_error, Toast.LENGTH_LONG).show()
+            else shareStory()
         }
+    }
+
+    //https://stackoverflow.com/questions/62715886/how-to-add-instagram-share-to-story-button-in-my-android-app
+    private fun shareStory(){
+        val sticker = BitmapFactory.decodeResource(cntx.resources,
+            R.drawable.test)
+
+        val savedImageURL: String = MediaStore.Images.Media.insertImage(
+            cntx.contentResolver,
+            sticker,
+            "test_image",
+            "image_description"
+        )
+
+
+        val savedImageURI = Uri.parse(savedImageURL)
+
+        val storiesIntent = Intent("com.instagram.share.ADD_TO_STORY").apply {
+            type = "image/jpeg"
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            setPackage("com.instagram.android")
+
+            putExtra("interactive_asset_uri", savedImageURI)
+            putExtra("content_url", "something");
+            putExtra("top_background_color", "#33FF33");
+            putExtra("bottom_background_color", "#FF00FF")
+        }
+
+        cntx.grantUriPermission("com.instagram.android", savedImageURI, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        cntx.startActivity(storiesIntent)
     }
 
     // creating a method for view pager for on page change listener.
@@ -108,31 +141,6 @@ class MilestonesObsluha(
         // below method is use to check scroll state.
         override fun onPageScrollStateChanged(state: Int) {
         }
-    }
-
-    fun opytajSA(){
-        val builder: AlertDialog.Builder = Builder(cntx)
-
-        builder.setTitle(R.string.confirm)
-        builder.setMessage(R.string.sure)
-
-        builder.setPositiveButton(
-            R.string.yes,
-            DialogInterface.OnClickListener { dialog, which -> // Do nothing, but close the dialog
-                val milestonesViewModel : MilestonesViewModel by activity.viewModels {
-                    MilestonesViewModel.MilestoneViewModelFactory((activity.application as MemoraApplication).milestonesRepository)
-                }
-                milestonesViewModel.delete(milestoneList.get(pozicia))
-            })
-
-        builder.setNegativeButton(
-            R.string.no,
-            DialogInterface.OnClickListener { dialog, which -> // Do nothing
-                dialog.dismiss()
-            })
-
-        val alert: AlertDialog = builder.create()
-        alert.show()
     }
 
 }

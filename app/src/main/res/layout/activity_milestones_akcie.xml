@@ -5,7 +5,8 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/main"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".milniky.crud.MilestonesAkcieActivity">
+tools:context=".milniky.crud.MilestonesAkcieActivity"
+    android:background="@drawable/poadie_abstract">
 
     <LinearLayout
         android:id="@+id/linearLayoutHeader"

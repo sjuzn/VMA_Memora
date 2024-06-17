@@ -20,9 +20,7 @@ import sk.upjs.druhypokus.milniky.MilestonesViewModel
 class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelectedListener  {
 
     private lateinit var drawerLayout: DrawerLayout
-    //private lateinit var appBarConfiguration: AppBarConfiguration
-
-    var milestoneList: List<Milestone> = emptyList()
+    private var milestoneList: List<Milestone> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -37,20 +35,6 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val welcomeName = findViewById<TextView>(R.id.welcomeName)
-        if(PrefSingleton.getInstance().getPreferenceString("meno") == null){
-            welcomeName.text = getString(R.string.welcome)
-        }else welcomeName.text = getString(R.string.welcome) + " " + (PrefSingleton.getInstance().getPreferenceString("meno"))
-
-        welcomeName.visibility = View.VISIBLE
-        /*
-        var btA = findViewById<ImageButton>(R.id.imageButtonEdit)
-        btA.visibility = View.GONE
-        btA = findViewById<ImageButton>(R.id.imageButtonShare)
-        btA.visibility = View.GONE
-        val a = findViewById<TextView>(R.id.poziciaText)
-        a.visibility = View.GONE
-*/
         chcemToggle()
         inicializujMenu()
 

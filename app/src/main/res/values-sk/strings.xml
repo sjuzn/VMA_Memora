@@ -8,7 +8,7 @@
     <string name="slide3_nadpis">Zapnúť upozornenia</string>
     <string name="slide3_caption">Dostávajte upozornenia, aby ste si pripomenuli svoje výročia. Sľubujeme, že vás nebudeme spamovať.</string>
     <string name="slide4_nadpis">Skoro hotovo</string>
-    <string name="slide4_caption">Prihlásenie je kľúčom k zabezpečeniu vášho účtu. Bez neho môžete riskovať stratu prístupu. Zaregistrujte sa ešte dnes!</string>
+    <string name="slide4_caption">Povoľte prístup k vašim súborom. Vaše súkromie je pre nás dôležité.</string>
     <string name="enter_your_name">Meno</string>
     <string name="turn_on">Zapnúť</string>
     <string name="name">meno</string>
@@ -42,4 +42,11 @@
     <string name="days">" dní"</string>
     <string name="warning">Upozornenie</string>
     <string name="unfilled">Niektoré polia nie sú vyplnené</string>
+    <string name="reorder_error">Nie je čo preusporiadať!</string>
+    <string name="hi">Ahoj</string>
+    <string name="todays_anniversaries">Dnešné výročia</string>
+    <string name="upcoming_anniversary">Nadchádzajúce výročie</string>
+    <string name="no_upcoming_anniversary">Žiadne výročie</string>
+    <string name="try_to_add">Skús najprv pridať nejaký míľnik</string>
+    <string name="share_error">Nie je čo zdieľať!</string>
 </resources>

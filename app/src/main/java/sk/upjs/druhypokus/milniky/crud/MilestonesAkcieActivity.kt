@@ -50,7 +50,10 @@ class MilestonesAkcieActivity : AppCompatActivity() {
                 nadpis.text = getString(R.string.add)
                 MilestoneAddFragment.newInstance()
             }
-            //"order" -> MilestoneOrderFragment()
+            "order" ->{
+                nadpis.text = getString(R.string.order)
+                MilestoneReorderFragment.newInstance()
+            }
             else -> throw IllegalArgumentException("menu option not implemented!!") // Default fragment
         }
 

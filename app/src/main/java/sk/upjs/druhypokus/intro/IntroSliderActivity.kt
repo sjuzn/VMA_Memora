@@ -27,6 +27,7 @@ class IntroSliderActivity : AppCompatActivity() {
     lateinit var indicatorSlideOneTV: TextView
     lateinit var indicatorSlideTwoTV: TextView
     lateinit var indicatorSlideThreeTV: TextView
+    lateinit var indicatorSlideFourTV: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -40,6 +41,8 @@ class IntroSliderActivity : AppCompatActivity() {
         indicatorSlideOneTV = findViewById(R.id.idTVSlideOne)
         indicatorSlideTwoTV = findViewById(R.id.idTVSlideTwo)
         indicatorSlideThreeTV = findViewById(R.id.idTVSlideThree)
+        indicatorSlideFourTV = findViewById(R.id.idTVSlideFour)
+
 
         // on below line we are adding click listener for our skip button
         skipBtn.setOnClickListener {
@@ -77,6 +80,14 @@ class IntroSliderActivity : AppCompatActivity() {
             )
         )
 
+        sliderList.add(
+            SliderData(
+                resources.getString(R.string.slide4_nadpis),
+                resources.getString(R.string.slide4_caption),
+                R.drawable.invitation
+            )
+        )
+
         // on below line we are adding slider list
         // to our adapter class.
         sliderAdapter = SliderAdapter(this, sliderList)
@@ -107,18 +118,28 @@ class IntroSliderActivity : AppCompatActivity() {
             // on below line we are checking position and updating text view text color.
             when (position){
                 0 -> {
+                    indicatorSlideFourTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                     indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                     indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                     indicatorSlideOneTV.setTextColor(resources.getColor(R.color.cervena_tmava))
+
                 }
                 1 -> {
+                    indicatorSlideFourTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                     indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.cervena_tmava))
                     indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                     indicatorSlideOneTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                 }
                 2 -> {
+                    indicatorSlideFourTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                     indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                     indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.cervena_tmava))
+                    indicatorSlideOneTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
+                }
+                3 -> {
+                    indicatorSlideFourTV.setTextColor(resources.getColor(R.color.cervena_tmava))
+                    indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
+                    indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                     indicatorSlideOneTV.setTextColor(resources.getColor(R.color.cervena_tmava_zosvetlena))
                 }
             }

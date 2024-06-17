@@ -16,9 +16,21 @@ class MilestonesViewModel (private val repository: MilestonesRepository) : ViewM
         }
     }
 
+    fun deleteAll() {
+        viewModelScope.launch {
+            repository.deleteAll()
+        }
+    }
+
     fun insert(milestone: Milestone) {
         viewModelScope.launch {
             repository.insert(milestone)
+        }
+    }
+
+    fun replaceAll(milestone: List<Milestone>) {
+        viewModelScope.launch {
+            repository.replaceAll(milestone)
         }
     }
 
