@@ -22,7 +22,7 @@ import java.time.temporal.ChronoUnit
 
 class MilestonesSwipeAdapter (
     val context: Context,
-    val milestoneList: List<Milestone>
+    private val milestoneList: List<Milestone>
 ) : PagerAdapter() {
 
     override fun getCount(): Int {

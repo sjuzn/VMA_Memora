@@ -2,6 +2,7 @@ package sk.upjs.druhypokus.intro
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -16,8 +17,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.PagerAdapter
-import sk.upjs.druhypokus.main.PrefSingleton
 import sk.upjs.druhypokus.R
+import sk.upjs.druhypokus.main.PrefSingleton
+import java.security.AccessController.getContext
+
 
 class SliderAdapter(
     val context: Context,

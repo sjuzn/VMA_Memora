@@ -128,7 +128,6 @@ class MilestonesFragment : Fragment() {
             "image_description"
         )
 
-
         val savedImageURI = Uri.parse(savedImageURL)
 
         val storiesIntent = Intent("com.instagram.share.ADD_TO_STORY").apply {
@@ -138,8 +137,8 @@ class MilestonesFragment : Fragment() {
 
             putExtra("interactive_asset_uri", savedImageURI)
             putExtra("content_url", "something");
-            putExtra("top_background_color", "#33FF33");
-            putExtra("bottom_background_color", "#FF00FF")
+            putExtra("top_background_color", R.color.cervena_tmava);
+            putExtra("bottom_background_color", R.color.cervena_tmava_zosvetlena)
         }
 
         requireContext().grantUriPermission("com.instagram.android", savedImageURI, Intent.FLAG_GRANT_READ_URI_PERMISSION)
