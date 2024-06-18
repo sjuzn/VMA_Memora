@@ -85,22 +85,21 @@ class WelcomeFragment : Fragment() {
 
             when {
                 ContextCompat.checkSelfPermission(
-                    requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    requireContext(), android.Manifest.permission.READ_MEDIA_IMAGES
                 ) == PackageManager.PERMISSION_GRANTED -> {
                     // mam povolenie
                     currView.findViewById<ImageView>(R.id.imageView).setImageURI(Uri.parse(milestone.fotka))
                 }
 
-                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_MEDIA_IMAGES) -> {
                     // tu bude alert dialog
                     Toast.makeText(requireContext(), "NO PERMISSION", Toast.LENGTH_SHORT).show()
                 }
 
                 else -> {
-                    requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    requestPermissionLauncher.launch(android.Manifest.permission.READ_MEDIA_IMAGES)
                 }
             }
-
         }
     }
 
