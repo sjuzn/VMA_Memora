@@ -3,8 +3,7 @@ package sk.upjs.druhypokus
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -12,9 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.milniky.Milestone
-import sk.upjs.druhypokus.milniky.MilestonesObsluha
+import sk.upjs.druhypokus.milniky.MilestonesFragment
 import sk.upjs.druhypokus.milniky.MilestonesViewModel
+import sk.upjs.druhypokus.welcome.WelcomeFragment
 
 
 class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelectedListener  {
@@ -76,14 +77,38 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
     private fun vyberUdalost(menuItem: MenuItem) {
 
         when (menuItem.itemId) {
-            R.id.nav_milestones -> MilestonesObsluha(this.findViewById<View?>(android.R.id.content).rootView as View, this, milestoneList).obsluhaMilestone()
-            /*R.id.nav_moments -> MilestonesSwipeFragment(this, milestoneList)
-            R.id.nav_capsules -> MilestonesSwipeFragment(this, milestoneList)
-            R.id.nav_list -> MilestonesSwipeFragment(this, milestoneList)
-            R.id.nav_memo -> MilestonesSwipeFragment(this, milestoneList)
-            R.id.nav_calendar -> MilestonesSwipeFragment(this, milestoneList)
-            R.id.nav_invite -> MilestonesSwipeFragment(this, milestoneList)
-            R.id.nav_settings -> MilestonesSwipeFragment(this, milestoneList)
+            R.id.nav_milestones ->{
+                Toast.makeText(this, milestoneList.size.toString(), Toast.LENGTH_LONG).show()
+
+                val fragment : MilestonesFragment = if(milestoneList.isEmpty()){
+                    MilestonesFragment.newInstance(arrayListOf())
+                }else{
+                    MilestonesFragment.newInstance(milestoneList as java.util.ArrayList<Milestone>)
+                }
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commit()
+            }
+
+            R.id.nav_home -> {
+                val fragment : WelcomeFragment = if(milestoneList.isEmpty()){
+                    WelcomeFragment.newInstance(arrayListOf())
+                }else{
+                    WelcomeFragment.newInstance(milestoneList as java.util.ArrayList<Milestone>)
+                }
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commit()
+            }
+
+            //R.id.nav_settings -> MilestonesSwipeFragment(this, milestoneList)
+            /*R.id.nav_moments ->
+            R.id.nav_capsules ->
+            R.id.nav_list ->
+            R.id.nav_memo ->
+            R.id.nav_calendar ->
+            R.id.nav_invite ->
+
 */
             else -> throw IllegalArgumentException("menu option not implemented!!")
         }

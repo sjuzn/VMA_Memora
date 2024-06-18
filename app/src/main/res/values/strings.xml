@@ -62,6 +62,9 @@
     <string name="upcoming_anniversary">Upcoming anniversary</string>
     <string name="no_upcoming_anniversary">No anniversary</string>
     <string name="try_to_add">Try to add some milestone first</string>
+    <string name="home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

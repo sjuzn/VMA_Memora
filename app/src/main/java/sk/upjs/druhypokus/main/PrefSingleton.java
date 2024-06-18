@@ -1,4 +1,4 @@
-package sk.upjs.druhypokus;
+package sk.upjs.druhypokus.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;

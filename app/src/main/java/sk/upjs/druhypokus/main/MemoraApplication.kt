@@ -1,4 +1,4 @@
-package sk.upjs.druhypokus
+package sk.upjs.druhypokus.main
 
 import android.app.Application
 import sk.upjs.druhypokus.milniky.MilestonesRepository

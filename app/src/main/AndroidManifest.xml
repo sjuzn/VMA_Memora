@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
-        android:name=".MemoraApplication"
+        android:name=".main.MemoraApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,17 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DruhyPokus"
         tools:targetApi="31">
-        <activity
-            android:name=".welcome.WelcomeActivity"
-            android:exported="false" />
+
         <activity
             android:name=".milniky.crud.MilestonesAkcieActivity"
             android:exported="false" />
 
-        <service android:name=".BackgroundSoundService" />
+        <service android:name=".main.BackgroundSoundService" />
 
         <activity
-            android:name=".AppStart"
+            android:name=".main.AppStart"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

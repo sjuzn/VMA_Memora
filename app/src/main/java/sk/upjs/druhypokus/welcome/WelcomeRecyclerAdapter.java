@@ -32,6 +32,7 @@ public class WelcomeRecyclerAdapter extends RecyclerView.Adapter<WelcomeRecycler
 
     @Override
     public void onBindViewHolder(@NonNull WelcomeRecyclerAdapter.ViewHolder holder, int position) {
+        
             holder.rowCountTextView.setText(milestonesList.get(position).getZucastneni() + " | " + milestonesList.get(position).getDatum());
             holder.textView.setText(milestonesList.get(position).getTyp());
     }

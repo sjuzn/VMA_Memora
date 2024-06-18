@@ -7,7 +7,12 @@
     android:fitsSystemWindows="false"
     tools:openDrawer="start">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentContainer" />
 
+<!--
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/container_pages"
         android:layout_width="match_parent"
@@ -55,7 +60,7 @@
               app:layout_constraintEnd_toEndOf="parent" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
-
+-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"

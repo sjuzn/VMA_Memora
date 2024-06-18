@@ -16,7 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import sk.upjs.druhypokus.MemoraApplication
+import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.milniky.Milestone
 import sk.upjs.druhypokus.milniky.MilestonesViewModel
@@ -39,7 +39,7 @@ class MilestoneEditFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            milestone = it.getSerializable(ARG_PARAM1) as Milestone
+            milestone = it.getParcelable(ARG_PARAM1)!!
         }
 
         // Initialize the ActivityResultLauncher
@@ -186,7 +186,7 @@ class MilestoneEditFragment : Fragment() {
         fun newInstance(milestone: Milestone) =
             MilestoneEditFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(ARG_PARAM1, milestone)
+                    putParcelable(ARG_PARAM1, milestone)
                 }
             }
     }

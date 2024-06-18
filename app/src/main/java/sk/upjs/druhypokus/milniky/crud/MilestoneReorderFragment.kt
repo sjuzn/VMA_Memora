@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import sk.upjs.druhypokus.MemoraApplication
+import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.milniky.Milestone
 import sk.upjs.druhypokus.milniky.MilestonesViewModel
 import java.util.Collections
 
-private const val ARG_PARAM1 = "param1"
 class MilestoneReorderFragment : Fragment() {
 
     private val milestonesViewModel: MilestonesViewModel by viewModels {

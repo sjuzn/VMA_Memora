@@ -1,10 +1,10 @@
-package sk.upjs.druhypokus
+package sk.upjs.druhypokus.main
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import sk.upjs.druhypokus.MainActivity
 import sk.upjs.druhypokus.intro.IntroSliderActivity
-import sk.upjs.druhypokus.welcome.WelcomeActivity
 
 class AppStart : AppCompatActivity(){
 
@@ -25,7 +25,7 @@ class AppStart : AppCompatActivity(){
             startActivity(intent)
         } else {
             // Spustenie MainActivity
-            val intent = Intent(this, WelcomeActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 

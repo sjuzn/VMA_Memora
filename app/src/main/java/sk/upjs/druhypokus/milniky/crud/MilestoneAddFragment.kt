@@ -17,7 +17,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import sk.upjs.druhypokus.MemoraApplication
+import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.milniky.Milestone
 import sk.upjs.druhypokus.milniky.MilestonesViewModel
@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+private const val ARG_PARAM1 = "param1"
 class MilestoneAddFragment : Fragment() {
 
     private val milestonesViewModel: MilestonesViewModel by viewModels {

@@ -33,7 +33,7 @@ public class ReorderMRecyclerAdapter extends RecyclerView.Adapter<ReorderMRecycl
     @Override
     public void onBindViewHolder(@NonNull ReorderMRecyclerAdapter.ViewHolder holder, int position) {
         holder.rowCountTextView.setText(milestonesList.get(position).getZucastneni()+" | " + milestonesList.get(position).getDatum());
-        holder.textView.setText(milestonesList.get(position).getTyp() + " " + position);
+        holder.textView.setText(milestonesList.get(position).getTyp());
     }
 
     @Override

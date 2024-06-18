@@ -16,7 +16,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.PagerAdapter
-import sk.upjs.druhypokus.PrefSingleton
+import sk.upjs.druhypokus.main.PrefSingleton
 import sk.upjs.druhypokus.R
 
 class SliderAdapter(
