@@ -45,9 +45,10 @@
     <string name="reorder_error">Nie je čo preusporiadať!</string>
     <string name="hi">Ahoj</string>
     <string name="todays_anniversaries">Dnešné výročia</string>
-    <string name="upcoming_anniversary">Nadchádzajúce výročie</string>
+    <string name="upcoming_anniversary">Najbližšie výročie</string>
     <string name="no_upcoming_anniversary">Žiadne výročie</string>
     <string name="try_to_add">Skús najprv pridať nejaký míľnik</string>
     <string name="share_error">Nie je čo zdieľať!</string>
     <string name="home">Domov</string>
+    <string name="success_reorder">Zmena poradia bola úspešná</string>
 </resources>

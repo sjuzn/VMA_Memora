@@ -1,14 +1,21 @@
 package sk.upjs.druhypokus.milniky.crud
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.milniky.Milestone
@@ -22,21 +29,20 @@ class MilestoneReorderFragment : Fragment() {
     }
     lateinit var mutableMilestones: MutableList<Milestone>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("MilestoneReorderFragment", "onCreateView called")
         val view = inflater.inflate(R.layout.fragment_milestone_reorder, container, false)
         val milestonesLiveData = milestonesViewModel.milestones
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
         milestonesLiveData.observe(viewLifecycleOwner) { milestones ->
+            Log.d("MilestoneReorderFragment", "LiveData observed, milestones updated")
             mutableMilestones = milestones.toMutableList()
             val reorderMRecyclerAdapter = ReorderMRecyclerAdapter(mutableMilestones)
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
             recyclerView.adapter = reorderMRecyclerAdapter
         }
 
@@ -45,8 +51,16 @@ class MilestoneReorderFragment : Fragment() {
 
         val btOK = view.findViewById<Button>(R.id.btOK)
         btOK.setOnClickListener {
-            milestonesViewModel.replaceAll(mutableMilestones)
-            requireActivity().finish()
+            milestonesLiveData.removeObservers(viewLifecycleOwner)
+            Log.d("MilestoneReorderFragment", "btOK clicked")
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                Log.d("MilestoneReorderFragment", "Starting replaceAll in coroutine")
+                milestonesViewModel.replaceAll(mutableMilestones)
+                withContext(Dispatchers.Main) {
+                    Log.d("MilestoneReorderFragment", "replaceAll finished, finishing activity")
+                    Toast.makeText(requireContext(), "Reordered successfully", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
 
         return view

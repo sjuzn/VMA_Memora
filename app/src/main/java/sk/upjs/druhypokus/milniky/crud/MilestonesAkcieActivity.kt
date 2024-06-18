@@ -26,15 +26,21 @@ class MilestonesAkcieActivity : AppCompatActivity() {
             insets
         }
 
-        val back : ImageButton = this.findViewById(R.id.buttonBack)
-        back.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            this.startActivity(intent)
-            finish()
-        }
-
         val fragmentType = intent.getStringExtra("TLACIDLO")
         milestone = intent.getSerializableExtra("MILESTONE") as Milestone
+
+        val back : ImageButton = this.findViewById(R.id.buttonBack)
+        back.setOnClickListener{
+
+                val intent = Intent(
+                    applicationContext,
+                    MainActivity::class.java
+                )
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
+
+        }
+
         loadFragment(fragmentType)
     }
 
@@ -59,6 +65,17 @@ class MilestonesAkcieActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null) // Pridajte tento riadok
             .commit()
+    }
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(
+            this,
+            MainActivity::class.java
+        )
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 }

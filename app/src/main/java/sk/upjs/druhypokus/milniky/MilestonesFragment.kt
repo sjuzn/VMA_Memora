@@ -19,7 +19,6 @@ import androidx.viewpager.widget.ViewPager
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.milniky.crud.MilestonesAkcieActivity
-import sk.upjs.druhypokus.welcome.WelcomeRecyclerAdapter
 import java.io.Serializable
 
 
@@ -45,7 +44,6 @@ class MilestonesFragment : Fragment() {
 
         milestonesViewModel.milestones.observe(viewLifecycleOwner) { milestones ->
             milestones?.let {
-                Toast.makeText(requireContext(), it.size.toString(), Toast.LENGTH_LONG).show()
 
                 val viewPager: ViewPager = currView.findViewById(R.id.container_pages)
                 val milestonesAdapter = MilestonesSwipeAdapter(requireContext(),it)

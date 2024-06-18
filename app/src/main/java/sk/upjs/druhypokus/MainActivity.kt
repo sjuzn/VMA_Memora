@@ -3,7 +3,6 @@ package sk.upjs.druhypokus
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -15,6 +14,7 @@ import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.milniky.Milestone
 import sk.upjs.druhypokus.milniky.MilestonesFragment
 import sk.upjs.druhypokus.milniky.MilestonesViewModel
+import sk.upjs.druhypokus.settings.SettingsFragment
 import sk.upjs.druhypokus.welcome.WelcomeFragment
 
 
@@ -78,10 +78,7 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
 
         when (menuItem.itemId) {
             R.id.nav_milestones ->{
-                Toast.makeText(this, milestoneList.size.toString(), Toast.LENGTH_LONG).show()
-
                 val fragment = MilestonesFragment.newInstance()
-
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
                     .commit()
@@ -94,7 +91,12 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
                     .commit()
             }
 
-            //R.id.nav_settings -> MilestonesSwipeFragment(this, milestoneList)
+            R.id.nav_settings -> {
+                val fragment : SettingsFragment = SettingsFragment.newInstance()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commit()
+            }
             /*R.id.nav_moments ->
             R.id.nav_capsules ->
             R.id.nav_list ->

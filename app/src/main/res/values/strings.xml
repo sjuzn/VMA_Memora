@@ -59,12 +59,12 @@
     <string name="unfilled">You left some fields unfilled</string>
     <string name="hi">Hi</string>
     <string name="todays_anniversaries">Todays anniversaries</string>
-    <string name="upcoming_anniversary">Upcoming anniversary</string>
+    <string name="upcoming_anniversary">Nearest anniversary</string>
     <string name="no_upcoming_anniversary">No anniversary</string>
     <string name="try_to_add">Try to add some milestone first</string>
     <string name="home">Home</string>
+    <string name="success_reorder">Reordered successfully</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>

@@ -26,9 +26,9 @@ class MilestonesRepository(private val milestonesDao: MilestonesDao) {
         milestonesDao.insert(milestone)
     }
 
-    suspend fun replaceAll(milestone : List<Milestone>){
+    suspend fun replaceAll(milestones: List<Milestone>) = withContext(Dispatchers.IO) {
         deleteAll()
-        milestonesDao.insert(milestone)
+        milestonesDao.insert(milestones)
     }
 
     suspend fun delete(milestone: Milestone) {
