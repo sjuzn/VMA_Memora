@@ -14,24 +14,26 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.ViewPager
 import sk.upjs.druhypokus.R
+import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.milniky.crud.MilestonesAkcieActivity
+import sk.upjs.druhypokus.welcome.WelcomeRecyclerAdapter
 import java.io.Serializable
 
 
-private const val ARG_PARAM1 = "param1"
 class MilestonesFragment : Fragment() {
 
     var pozicia = 0
     lateinit var currView : View
-    private lateinit var milestoneList: java.util.ArrayList<Milestone>
+    private val milestonesViewModel: MilestonesViewModel by viewModels {
+        MilestonesViewModel.MilestoneViewModelFactory((requireActivity().application as MemoraApplication).milestonesRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            milestoneList = it.getParcelableArrayList(ARG_PARAM1)!!
-        }
+        arguments?.let {}
     }
 
     override fun onCreateView(
@@ -41,35 +43,45 @@ class MilestonesFragment : Fragment() {
 
         currView = inflater.inflate(R.layout.fragment_milestones, container, false)
 
+        milestonesViewModel.milestones.observe(viewLifecycleOwner) { milestones ->
+            milestones?.let {
+                Toast.makeText(requireContext(), it.size.toString(), Toast.LENGTH_LONG).show()
 
-        Toast.makeText(requireContext(), milestoneList.size.toString(), Toast.LENGTH_LONG).show()
+                val viewPager: ViewPager = currView.findViewById(R.id.container_pages)
+                val milestonesAdapter = MilestonesSwipeAdapter(requireContext(),it)
+                viewPager.adapter = milestonesAdapter
+                viewPager.addOnPageChangeListener(viewListener)
 
-        val viewPager: ViewPager = currView.findViewById(R.id.container_pages)
-        val milestonesAdapter = MilestonesSwipeAdapter(requireContext(),milestoneList)
-        viewPager.adapter = milestonesAdapter
-        viewPager.addOnPageChangeListener(viewListener)
+                btEdit = currView.findViewById(R.id.imageButtonEdit)
+                val btShare = currView.findViewById<ImageButton>(R.id.imageButtonShare)
+                if(it.isEmpty()){
+                    currView.findViewById<TextView>(R.id.poziciaText).text = ("0").plus("/").plus(it.size)
+                }else{
+                    currView.findViewById<TextView>(R.id.poziciaText).text = ("1").plus("/").plus(it.size)
+                }
 
-        btEdit = currView.findViewById(R.id.imageButtonEdit)
-        val btShare = currView.findViewById<ImageButton>(R.id.imageButtonShare)
-        if(milestoneList.isEmpty()){
-            currView.findViewById<TextView>(R.id.poziciaText).text = ("0").plus("/").plus(milestoneList.size)
-        }else{
-            currView.findViewById<TextView>(R.id.poziciaText).text = ("1").plus("/").plus(milestoneList.size)
+                btEdit.setOnClickListener(btEditListener)
+
+                if(it.isEmpty()){
+                    btShare.setOnClickListener{
+                        Toast.makeText(requireContext(), R.string.share_error, Toast.LENGTH_LONG).show()
+                    }
+                }else{
+                    btShare.setOnClickListener{
+                        shareStory()
+                    }
+                }
+
+            }
         }
 
-        btEdit.setOnClickListener(btEditListener)
 
-        btShare.setOnClickListener{
-            if(milestoneList.isEmpty())
-                Toast.makeText(requireContext(), R.string.share_error, Toast.LENGTH_LONG).show()
-            else shareStory()
-        }
 
         return currView
     }
 
     lateinit var btEdit : ImageButton
-    val btEditListener = OnClickListener {
+    private val btEditListener = OnClickListener {
         // Initializing the popup menu and giving the reference as current context
         val popupMenu = PopupMenu(requireContext(), btEdit)
 
@@ -86,26 +98,50 @@ class MilestonesFragment : Fragment() {
                 }
 
                 R.id.edit -> {
-                    if(milestoneList.isEmpty()){
-                        Toast.makeText(requireContext(), R.string.edit_error, Toast.LENGTH_LONG).show()
-                    }else{
-                        val intent = Intent(requireContext(), MilestonesAkcieActivity::class.java)
-                        intent.putExtra("TLACIDLO", "edit")
-                        intent.putExtra("MILESTONE", (milestoneList[pozicia] as Serializable?))
-                        requireContext().startActivity(intent)
+
+                    milestonesViewModel.milestones.observe(viewLifecycleOwner) { milestones ->
+                        milestones?.let {
+                            if (it.isEmpty()) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    R.string.edit_error,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else {
+                                val intent =
+                                    Intent(requireContext(), MilestonesAkcieActivity::class.java)
+                                intent.putExtra("TLACIDLO", "edit")
+                                intent.putExtra(
+                                    "MILESTONE",
+                                    (it[pozicia] as Serializable?)
+                                )
+                                requireContext().startActivity(intent)
+                            }
+                        }
                     }
                     true
                 }
 
                 R.id.order -> {
-                    if(milestoneList.isEmpty()){
-                        Toast.makeText(requireContext(), R.string.reorder_error, Toast.LENGTH_LONG).show()
-                    }else{
-                        val intent = Intent(requireContext(), MilestonesAkcieActivity::class.java)
-                        intent.putExtra("TLACIDLO", "order")
-                        intent.putExtra("MILESTONE", Milestone("","","","")as Serializable?)
-                        requireContext().startActivity(intent)
-                    }
+                    milestonesViewModel.milestones.observe(viewLifecycleOwner) { milestones ->
+                        milestones?.let {
+                            if (it.isEmpty()) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    R.string.reorder_error,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else {
+                                val intent =
+                                    Intent(requireContext(), MilestonesAkcieActivity::class.java)
+                                intent.putExtra("TLACIDLO", "order")
+                                intent.putExtra(
+                                    "MILESTONE",
+                                    Milestone("", "", "", "") as Serializable?
+                                )
+                                requireContext().startActivity(intent)
+                            }
+                        }}
                     true
                 }
 
@@ -158,7 +194,12 @@ class MilestonesFragment : Fragment() {
         override fun onPageSelected(position: Int) {
             pozicia = position
             val p : Int = position + 1
-            currView.findViewById<TextView>(R.id.poziciaText).text = (p.toString()).plus("/").plus(milestoneList.size)
+            milestonesViewModel.milestones.observe(viewLifecycleOwner) { milestones ->
+                milestones?.let {
+                    currView.findViewById<TextView>(R.id.poziciaText).text =
+                        (p.toString()).plus("/").plus(it.size)
+                }
+            }
         }
 
         // below method is use to check scroll state.
@@ -168,11 +209,9 @@ class MilestonesFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(milestone: java.util.ArrayList<Milestone>) =
+        fun newInstance() =
             MilestonesFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelableArrayList(ARG_PARAM1, milestone)
-                }
+                arguments = Bundle().apply {}
             }
     }
 }

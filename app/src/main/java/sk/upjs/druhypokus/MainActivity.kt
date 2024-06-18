@@ -80,22 +80,15 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
             R.id.nav_milestones ->{
                 Toast.makeText(this, milestoneList.size.toString(), Toast.LENGTH_LONG).show()
 
-                val fragment : MilestonesFragment = if(milestoneList.isEmpty()){
-                    MilestonesFragment.newInstance(arrayListOf())
-                }else{
-                    MilestonesFragment.newInstance(milestoneList as java.util.ArrayList<Milestone>)
-                }
+                val fragment = MilestonesFragment.newInstance()
+
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
                     .commit()
             }
 
             R.id.nav_home -> {
-                val fragment : WelcomeFragment = if(milestoneList.isEmpty()){
-                    WelcomeFragment.newInstance(arrayListOf())
-                }else{
-                    WelcomeFragment.newInstance(milestoneList as java.util.ArrayList<Milestone>)
-                }
+                val fragment : WelcomeFragment = WelcomeFragment.newInstance()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
                     .commit()
