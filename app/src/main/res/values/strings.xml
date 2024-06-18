@@ -64,7 +64,11 @@
     <string name="try_to_add">Try to add some milestone first</string>
     <string name="home">Home</string>
     <string name="success_reorder">Reordered successfully</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="change_name">Change name</string>
+    <string name="change_language">Change language</string>
+    <string name="milestone_anniversary_reminders">Milestone anniversary reminders</string>
+    <string name="time_capsule_reminders">Time capsule reminders</string>
+    <string name="turn_off_music">Turn off music</string>
 
 </resources>

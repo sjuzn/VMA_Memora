@@ -51,4 +51,9 @@
     <string name="share_error">Nie je čo zdieľať!</string>
     <string name="home">Domov</string>
     <string name="success_reorder">Zmena poradia bola úspešná</string>
+    <string name="change_name">Zmeniť meno</string>
+    <string name="change_language">Zmeniť jazyk</string>
+    <string name="milestone_anniversary_reminders">Pripomienky výročí</string>
+    <string name="time_capsule_reminders">Pripomienky otvorenia časovej kapsuly</string>
+    <string name="turn_off_music">Vypnúť hudbu</string>
 </resources>
