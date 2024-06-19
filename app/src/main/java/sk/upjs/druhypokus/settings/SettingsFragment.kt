@@ -78,6 +78,12 @@ class SettingsFragment : Fragment() {
             builder.show()
         }
 
+        textView5.text = if(PrefSingleton.getInstance().getPreferenceBoolean("hudba")){
+            getString(R.string.turn_on_music)
+        }else{
+            getString(R.string.turn_off_music)
+        }
+
         vypZapHudba.setOnClickListener {
             //zapnuta
             if(PrefSingleton.getInstance().getPreferenceBoolean("hudba")){

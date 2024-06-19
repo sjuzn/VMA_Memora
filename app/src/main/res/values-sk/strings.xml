@@ -58,4 +58,7 @@
     <string name="turn_off_music">Vypnúť hudbu</string>
     <string name="turn_on_music">Zapnúť hudbu</string>
     <string name="allow_notify">Povoliť upozornenia na pripomenutie výročia</string>
+    <string name="appwidget_text">Ďalšie výročie:</string>
+    <string name="add_widget">Pridať widget</string>
+    <string name="app_widget_description">Tento widget vám oznámi počet dní do ďalšieho výročia</string>
 </resources>

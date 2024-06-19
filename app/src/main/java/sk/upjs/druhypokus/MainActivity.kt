@@ -1,5 +1,7 @@
 package sk.upjs.druhypokus
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import sk.upjs.druhypokus.main.MemoraApplication
+import sk.upjs.druhypokus.main.NewAppWidget
 import sk.upjs.druhypokus.milniky.Milestone
 import sk.upjs.druhypokus.milniky.MilestonesFragment
 import sk.upjs.druhypokus.milniky.MilestonesViewModel
@@ -36,16 +39,21 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
+            ComponentName(
+                application,
+                NewAppWidget::class.java
+            )
+        )
+        val myWidget = NewAppWidget()
+        myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids)
+
         chcemToggle()
         inicializujMenu()
 
         //https://developer.android.com/training/system-ui/navigation#kotlin
         window.decorView.apply {
-            // Hide both the navigation bar and the status bar.
-            // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
-            // a general rule, you should design your app to hide the status bar whenever you
-            // hide the navigation bar.
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+           systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
     }
 

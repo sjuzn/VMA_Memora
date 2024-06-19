@@ -72,6 +72,9 @@
     <string name="turn_off_music">Turn off music</string>
     <string name="turn_on_music">Turn on music</string>
     <string name="allow_notify">Allow notifications for anniversary reminder</string>
+    <string name="appwidget_text">"Next anniversary: "</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This widget tells you number of days until next anniversary</string>
 
 
 </resources>

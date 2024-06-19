@@ -57,4 +57,7 @@
     <string name="turn_off_music">Spegni la musica</string>
     <string name="turn_on_music">Accendi la musica</string>
     <string name="allow_notify">Consenti notifiche per promemoria anniversario</string>
+    <string name="appwidget_text">Prossimo anniversario:</string>
+    <string name="add_widget">Aggiungi widget</string>
+    <string name="app_widget_description">Questo widget ti dice il numero di giorni fino al prossimo anniversario</string>
 </resources>
