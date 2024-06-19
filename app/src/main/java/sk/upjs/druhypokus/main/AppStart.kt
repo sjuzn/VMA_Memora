@@ -9,11 +9,12 @@ import sk.upjs.druhypokus.intro.IntroSliderActivity
 class AppStart : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        PrefSingleton.getInstance().Initialize(getApplicationContext());
+        PrefSingleton.getInstance().Initialize(applicationContext);
         super.onCreate(savedInstanceState)
 
         val intent = Intent(this, BackgroundSoundService::class.java)
         startService(intent)
+        PrefSingleton.getInstance().writePreference("hudba", true);
 
         val jePrveZapnutie = PrefSingleton.getInstance().getPreferenceBoolean("jePrveZapnutie")
 

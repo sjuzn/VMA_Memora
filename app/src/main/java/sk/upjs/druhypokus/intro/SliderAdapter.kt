@@ -75,6 +75,7 @@ class SliderAdapter(
             //var allowNotifyBtn: Button = view.findViewById(R.id.idBtnTurnOn)
             (view.findViewById<Button>(R.id.idBtnTurnOn)!!).setOnClickListener{
                 ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
+                ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
             }
         }
 

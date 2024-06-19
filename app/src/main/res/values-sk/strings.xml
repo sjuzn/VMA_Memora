@@ -56,4 +56,6 @@
     <string name="milestone_anniversary_reminders">Pripomienky výročí</string>
     <string name="time_capsule_reminders">Pripomienky otvorenia časovej kapsuly</string>
     <string name="turn_off_music">Vypnúť hudbu</string>
+    <string name="turn_on_music">Zapnúť hudbu</string>
+    <string name="allow_notify">Povoliť upozornenia na pripomenutie výročia</string>
 </resources>

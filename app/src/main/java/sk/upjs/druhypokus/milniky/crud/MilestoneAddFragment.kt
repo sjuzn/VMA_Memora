@@ -1,5 +1,6 @@
 package sk.upjs.druhypokus.milniky.crud
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -26,17 +27,18 @@ import java.util.Calendar
 import java.util.Locale
 
 private const val ARG_PARAM1 = "param1"
+
 class MilestoneAddFragment : Fragment() {
 
     private val milestonesViewModel: MilestonesViewModel by viewModels {
         MilestonesViewModel.MilestoneViewModelFactory((requireActivity().application as MemoraApplication).milestonesRepository)
     }
     private lateinit var selectImageLauncher: ActivityResultLauncher<Intent>
-    private lateinit var bPhoto :Button
-    private var typ : String = ""
-    private var datum : String = ""
-    private var fotka : String = ""
-    private var kto : String = ""
+    private lateinit var bPhoto: Button
+    private var typ: String = ""
+    private var datum: String = ""
+    private var fotka: String = ""
+    private var kto: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +67,8 @@ class MilestoneAddFragment : Fragment() {
         val bWho = view.findViewById<Button>(R.id.bWho)
         val btSave = view.findViewById<Button>(R.id.btSave)
 
-        btSave.setOnClickListener{
-            if((typ == "") or (datum == "") or (fotka == "") or (kto == "")){
+        btSave.setOnClickListener {
+            if ((typ == "") or (datum == "") or (fotka == "") or (kto == "")) {
                 val txt = TextView(this.context)
                 txt.text = getString(R.string.unfilled)
 
@@ -75,30 +77,33 @@ class MilestoneAddFragment : Fragment() {
                     .setView(txt)
                     .setPositiveButton(R.string.confirm) { _, _ -> }
                     .show()
-            }else{
+
+            } else {
                 milestonesViewModel.insert(Milestone(typ, datum, fotka, kto))
                 requireActivity().finish()
             }
         }
 
-        bType.setOnClickListener{
+        bType.setOnClickListener {
             val txt = EditText(this.context)
             txt.hint = bType.hint
 
             AlertDialog.Builder(requireContext())
                 .setTitle(R.string.edit)
                 .setView(txt)
-                .setPositiveButton(R.string.confirm
+                .setPositiveButton(
+                    R.string.confirm
                 ) { _, _ ->
                     typ = "" + txt.text.toString()
                     bType.text = typ
                 }
-                .setNegativeButton(R.string.no
+                .setNegativeButton(
+                    R.string.no
                 ) { _, _ -> }
                 .show()
         }
 
-        bDate.setOnClickListener{
+        bDate.setOnClickListener {
             // Získanie aktuálneho dátumu
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -106,40 +111,46 @@ class MilestoneAddFragment : Fragment() {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             // Vytvorenie a zobrazenie DatePickerDialog
-            val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                // Tu môžete spracovať vybraný dátum, napríklad uložiť ho do premennej alebo aktualizovať text tlačidla
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(selectedYear, selectedMonth, selectedDay)
+            val datePickerDialog =
+                DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                    // Tu môžete spracovať vybraný dátum, napríklad uložiť ho do premennej alebo aktualizovať text tlačidla
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(selectedYear, selectedMonth, selectedDay)
 
-                // Tu môžete aktualizovať text na tlačidle alebo robiť iné operácie s vybraným dátumom
-                val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(selectedDate.time)
-                datum = formattedDate
-                bDate.text = datum
+                    // Tu môžete aktualizovať text na tlačidle alebo robiť iné operácie s vybraným dátumom
+                    val formattedDate = SimpleDateFormat(
+                        "yyyy-MM-dd",
+                        Locale.getDefault()
+                    ).format(selectedDate.time)
+                    datum = formattedDate
+                    bDate.text = datum
 
-            }, year, month, day)
+                }, year, month, day)
 
             // Zobrazenie DatePickerDialog
             datePickerDialog.show()
         }
 
-        bWho.setOnClickListener{
+        bWho.setOnClickListener {
             val txt = EditText(this.context)
             txt.hint = bWho.hint
 
             AlertDialog.Builder(requireContext())
                 .setTitle(R.string.edit)
                 .setView(txt)
-                .setPositiveButton(R.string.confirm
+                .setPositiveButton(
+                    R.string.confirm
                 ) { _, _ ->
                     kto = "" + txt.text.toString()
                     bWho.text = kto
                 }
-                .setNegativeButton(R.string.no
+                .setNegativeButton(
+                    R.string.no
                 ) { _, _ -> }
                 .show()
         }
 
-        bPhoto.setOnClickListener{
+        bPhoto.setOnClickListener {
             selectImage()
         }
 

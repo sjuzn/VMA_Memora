@@ -70,5 +70,8 @@
     <string name="milestone_anniversary_reminders">Milestone anniversary reminders</string>
     <string name="time_capsule_reminders">Time capsule reminders</string>
     <string name="turn_off_music">Turn off music</string>
+    <string name="turn_on_music">Turn on music</string>
+    <string name="allow_notify">Allow notifications for anniversary reminder</string>
+
 
 </resources>
