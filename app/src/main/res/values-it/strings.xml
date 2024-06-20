@@ -60,4 +60,9 @@
     <string name="appwidget_text">Prossimo anniversario:</string>
     <string name="add_widget">Aggiungi widget</string>
     <string name="app_widget_description">Questo widget ti dice il numero di giorni fino al prossimo anniversario</string>
+    <string name="progress">Progresso</string>
+    <string name="active">ATTIVO</string>
+    <string name="done">FATTO</string>
+    <string name="new_task">Aggiungi nuove attività</string>
+    <string name="success_delete">Elemento eliminato con successo</string>
 </resources>

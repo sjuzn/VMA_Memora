@@ -30,17 +30,6 @@
             android:id="@+id/nav_list"
             android:icon="@drawable/ic_menu_memo"
             android:title="@string/menu_list" />
-        <!--
-                <item
-                    android:id="@+id/nav_memo"
-                    android:icon="@drawable/ic_menu_memo"
-                    androitle="@string/menu_memo" />
-
-                <item
-                    android:id="@+id/nav_calendar"
-                    android:icon="@drawable/ic_menu_calendar"
-                    android:title="@string/menu_calendar" />
-        -->
     </group>
 
     <group android:checkableBehavior="single">

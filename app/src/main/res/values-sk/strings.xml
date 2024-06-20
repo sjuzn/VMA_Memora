@@ -61,4 +61,9 @@
     <string name="appwidget_text">Ďalšie výročie:</string>
     <string name="add_widget">Pridať widget</string>
     <string name="app_widget_description">Tento widget vám oznámi počet dní do ďalšieho výročia</string>
+    <string name="progress">Pokrok</string>
+    <string name="active">AKTÍVNE</string>
+    <string name="done">HOTOVÉ</string>
+    <string name="new_task">Pridajte novú úlohu</string>
+    <string name="success_delete">Položka bola úspešne odstránená</string>
 </resources>

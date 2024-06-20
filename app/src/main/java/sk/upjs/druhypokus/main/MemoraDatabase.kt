@@ -7,15 +7,18 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import kotlinx.coroutines.CoroutineScope
+import sk.upjs.druhypokus.bucketList.BList
+import sk.upjs.druhypokus.bucketList.BListDao
 import sk.upjs.druhypokus.milniky.MilestonesDao
 import sk.upjs.druhypokus.milniky.Milestone
 import java.util.UUID
 
-@Database(entities = [Milestone::class], version = 1, exportSchema = false)
+@Database(entities = [Milestone::class, BList::class], version = 1, exportSchema = false)
 @TypeConverters(UuidConverter::class)
 abstract class MemoraDatabase : RoomDatabase() {
 
     abstract fun  milestonesDao() : MilestonesDao
+    abstract fun  bListDao() : BListDao
 
     companion object {
         @Volatile

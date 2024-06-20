@@ -37,7 +37,6 @@ class SettingsFragment : Fragment() {
 
         val zmenaMena = view.findViewById<View>(R.id.zmenaMena)
         val zmenaJazyka = view.findViewById<View>(R.id.zmenaJazyka)
-        val reminderMielstone = view.findViewById<View>(R.id.reminderMielstone)
         val reminderTimeCaps = view.findViewById<View>(R.id.reminderTimeCaps)
         val vypZapHudba = view.findViewById<View>(R.id.vypZapHudba)
         val menoSharedPref = view.findViewById<TextView>(R.id.menoSharedPref)
@@ -100,10 +99,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        reminderMielstone.setOnClickListener{
-           // showDialog();
-            Toast.makeText(requireContext(), "Not yet implemented", Toast.LENGTH_SHORT).show()
-        }
         return view
     }
 /*
