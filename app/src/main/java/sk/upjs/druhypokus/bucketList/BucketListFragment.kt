@@ -6,7 +6,9 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.OnClickListener
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
@@ -32,14 +34,14 @@ class BucketListFragment : Fragment() {
         BListViewModel.BListViewModelFactory((requireActivity().application as MemoraApplication).bListRepository)
     }
 
-    private var active = true;
+    var active = true;
 
 
     private lateinit var btActive: TextView
     private lateinit var btDone: TextView
     private lateinit var progressBar: ProgressBar
     private lateinit var progressTextView: TextView
-    private lateinit var recyclerView: RecyclerView
+    lateinit var recyclerView: RecyclerView
     private lateinit var imageButtonEdit: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +81,13 @@ class BucketListFragment : Fragment() {
 
         imageButtonEdit.setOnClickListener(addNewTask)
 
-        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        val itemTouchHelper = ItemTouchHelper(
+            MySimpleCallback(
+                this,
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
+                ItemTouchHelper.END
+            )
+        )
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
         return view
@@ -106,7 +114,6 @@ class BucketListFragment : Fragment() {
     private fun init(stav: Boolean) {
         val blist = bListViewModel.bList
         blist.observe(viewLifecycleOwner) { bList ->
-
             if (bList.isEmpty()) {
                 progressBar.progress = 100
                 progressTextView.text =
@@ -148,32 +155,73 @@ class BucketListFragment : Fragment() {
             .show()
     }
 
+    /*
+        private val simpleCallback: ItemTouchHelper.SimpleCallback =
+            object : ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
+                ItemTouchHelper.END
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return false
+                }
 
-    private val simpleCallback: ItemTouchHelper.SimpleCallback =
-        object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
-            ItemTouchHelper.END
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.adapterPosition
+                    var relevantnyZoznam = filtrujList(!active)
+
+
+                    val chcemVymazat = relevantnyZoznam[position]
+                    bListViewModel.delete(chcemVymazat)
+                    recyclerView.adapter!!.notifyItemRemoved(position)
+                    (relevantnyZoznam as ArrayList<BList>).remove(chcemVymazat)
+
+                    if (relevantnyZoznam.isEmpty())
+                        recyclerView.visibility = GONE
+
+                    Toast.makeText(requireContext(), R.string.success_delete, Toast.LENGTH_LONG).show()
+                }
             }
+    */
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                var relevantnyZoznam = filtrujList(!active)
+    class MySimpleCallback(
+        private val fragment: Fragment,
+        dragDirs: Int,
+        swipeDirs: Int
+    ) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
 
-
-                val chcemVymazat = relevantnyZoznam[position]
-                bListViewModel.delete(chcemVymazat)
-                recyclerView.adapter!!.notifyItemRemoved(position)
-
-                Toast.makeText(requireContext(), R.string.success_delete, Toast.LENGTH_LONG).show()
-            }
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return false
         }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val position = viewHolder.adapterPosition
+            var relevantnyZoznam =
+                (fragment as BucketListFragment).filtrujList(!fragment.active)
+
+            val chcemVymazat = relevantnyZoznam[position]
+            (fragment).bListViewModel.delete(chcemVymazat)
+            (fragment as BucketListFragment).recyclerView.adapter!!.notifyItemRemoved(position)
+            (relevantnyZoznam as ArrayList<BList>).remove(chcemVymazat)
+
+            // TOTO NECHYTAT INAK TO NEPOJDE
+            if (relevantnyZoznam.size == 0) {
+                Toast.makeText(fragment.requireContext(),R.string.success_delete, Toast.LENGTH_SHORT)
+                     .show()
+                (fragment.requireActivity() as MainActivity).restartFragment(fragment.id)
+            }
+
+
+            Toast.makeText(fragment.requireContext(), R.string.success_delete, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     companion object {
         @JvmStatic

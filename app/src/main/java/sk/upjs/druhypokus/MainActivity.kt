@@ -127,6 +127,17 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
         }
     }
 
+    fun restartFragment(fragmentId: Int) {
+        val currentFragment = this.supportFragmentManager.findFragmentById(fragmentId)!!
+
+        this.supportFragmentManager.beginTransaction()
+            .detach(currentFragment)
+            .commit()
+        this.supportFragmentManager.beginTransaction()
+            .attach(currentFragment)
+            .commit()
+    }
+
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
