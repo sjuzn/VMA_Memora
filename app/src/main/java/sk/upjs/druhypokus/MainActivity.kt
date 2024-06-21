@@ -5,6 +5,8 @@ import android.content.ComponentName
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.webkit.WebView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -19,7 +21,8 @@ import sk.upjs.druhypokus.main.NewAppWidget
 import sk.upjs.druhypokus.milniky.Milestone
 import sk.upjs.druhypokus.milniky.MilestonesFragment
 import sk.upjs.druhypokus.milniky.MilestonesViewModel
-import sk.upjs.druhypokus.settings.SettingsFragment
+import sk.upjs.druhypokus.settingsAndAbout.AboutFragment
+import sk.upjs.druhypokus.settingsAndAbout.SettingsFragment
 import sk.upjs.druhypokus.welcome.WelcomeFragment
 
 
@@ -119,8 +122,11 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
                 Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
             }
 
-            R.id.nav_list -> {
-                Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
+            R.id.nav_about -> {
+                val fragment = AboutFragment.newInstance()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commit()
             }
 
             else -> throw IllegalArgumentException("menu option not implemented!!")
@@ -146,4 +152,5 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
             super.onBackPressed()
         }
     }
+
 }

@@ -11,14 +11,21 @@ import sk.upjs.druhypokus.bucketList.BList
 import sk.upjs.druhypokus.bucketList.BListDao
 import sk.upjs.druhypokus.milniky.MilestonesDao
 import sk.upjs.druhypokus.milniky.Milestone
+import sk.upjs.druhypokus.moments.Moment
+import sk.upjs.druhypokus.moments.MomentTagCrossRef
+import sk.upjs.druhypokus.moments.Moment_Tag_Dao
+import sk.upjs.druhypokus.moments.Tag
 import java.util.UUID
 
-@Database(entities = [Milestone::class, BList::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Milestone::class, BList::class, Moment::class, Tag::class, MomentTagCrossRef::class], version = 1, exportSchema = false
+)
 @TypeConverters(UuidConverter::class)
 abstract class MemoraDatabase : RoomDatabase() {
 
-    abstract fun  milestonesDao() : MilestonesDao
-    abstract fun  bListDao() : BListDao
+    abstract fun milestonesDao(): MilestonesDao
+    abstract fun bListDao(): BListDao
+    abstract fun moment_Tag_Dao(): Moment_Tag_Dao
 
     companion object {
         @Volatile

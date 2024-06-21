@@ -66,4 +66,12 @@
     <string name="done">HOTOVÉ</string>
     <string name="new_task">Pridajte novú úlohu</string>
     <string name="success_delete">Položka bola úspešne odstránená</string>
+    <string name="about">O mne</string>
+    <string name="author_zb">Autor: Zuzana Baluchová</string>
+    <string name="resources">Zdroje:</string>
+    <string name="wallpaper_images">Obrázky na pozadí:</string>
+    <string name="icons">Ikony:</string>
+    <string name="vectors">Vektory:</string>
+    <string name="source_code">Zdrojový  kód:</string>
+    <string name="created_within_subject_vma">Vytvorené na predmete VMA na PF UPJŠ</string>
 </resources>

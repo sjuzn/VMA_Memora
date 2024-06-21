@@ -82,7 +82,15 @@
 
     <string name="new_task">Add new tasks</string>
     <string name="success_delete">Item deleted successfully</string>
+    <string name="about">About</string>
 
+    <string name="author_zb">Author: Zuzana Baluchová</string>
+    <string name="created_within_subject_vma">Created within subject VMA at PF UPJŠ</string>
+    <string name="resources">Resources:</string>
+    <string name="wallpaper_images">Wallpaper images:</string>
+    <string name="icons">Icons:</string>
+    <string name="vectors">Vectors:</string>
+    <string name="source_code">Source code:</string>
 
 
 </resources>

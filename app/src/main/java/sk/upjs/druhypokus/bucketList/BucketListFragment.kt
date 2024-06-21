@@ -155,38 +155,6 @@ class BucketListFragment : Fragment() {
             .show()
     }
 
-    /*
-        private val simpleCallback: ItemTouchHelper.SimpleCallback =
-            object : ItemTouchHelper.SimpleCallback(
-                ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
-                ItemTouchHelper.END
-            ) {
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
-                ): Boolean {
-                    return false
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val position = viewHolder.adapterPosition
-                    var relevantnyZoznam = filtrujList(!active)
-
-
-                    val chcemVymazat = relevantnyZoznam[position]
-                    bListViewModel.delete(chcemVymazat)
-                    recyclerView.adapter!!.notifyItemRemoved(position)
-                    (relevantnyZoznam as ArrayList<BList>).remove(chcemVymazat)
-
-                    if (relevantnyZoznam.isEmpty())
-                        recyclerView.visibility = GONE
-
-                    Toast.makeText(requireContext(), R.string.success_delete, Toast.LENGTH_LONG).show()
-                }
-            }
-    */
-
     class MySimpleCallback(
         private val fragment: Fragment,
         dragDirs: Int,

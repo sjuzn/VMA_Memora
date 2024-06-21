@@ -65,4 +65,12 @@
     <string name="done">FATTO</string>
     <string name="new_task">Aggiungi nuove attività</string>
     <string name="success_delete">Elemento eliminato con successo</string>
+    <string name="about">Su di me</string>
+    <string name="author_zb">Autore: Zuzana Baluchová</string>
+    <string name="resources">Risorse:</string>
+    <string name="wallpaper_images">Immagini dello sfondo:</string>
+    <string name="icons">Icone:</string>
+    <string name="vectors">Vettori:</string>
+    <string name="source_code">Codice sorgente:</string>
+    <string name="created_within_subject_vma">Creato nell\'ambito del soggetto VMA presso PF UPJŠ</string>
 </resources>
