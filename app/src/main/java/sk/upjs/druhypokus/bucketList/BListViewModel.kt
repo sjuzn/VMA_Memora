@@ -1,5 +1,6 @@
 package sk.upjs.druhypokus.bucketList
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -21,6 +22,7 @@ class BListViewModel  (private val repository: BListRepository) : ViewModel() {
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     fun delete(bList: BList?) {
         viewModelScope.launch {
             if(bList != null)

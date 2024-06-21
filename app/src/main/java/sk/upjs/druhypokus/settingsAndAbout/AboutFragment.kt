@@ -1,8 +1,9 @@
 package sk.upjs.druhypokus.settingsAndAbout
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -11,9 +12,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import sk.upjs.druhypokus.R
+
 
 //https://www.geeksforgeeks.org/how-to-use-webview-in-android/
 
@@ -34,7 +35,13 @@ class AboutFragment : Fragment() {
     ): View {
         mainView = inflater.inflate(R.layout.fragment_about, container, false)
 
-        mainView.findViewById<TextView>(R.id.a)?.setOnClickListener(otvorWebView)
+        mainView.findViewById<TextView>(R.id.a)?.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW)
+            val data = Uri.parse("mailto:"+ (it as TextView).text.toString() +"?subject=Memora")
+            intent.setData(data)
+            startActivity(intent)
+        }
+
         mainView.findViewById<TextView>(R.id.b)?.setOnClickListener(otvorWebView)
         mainView.findViewById<TextView>(R.id.c)?.setOnClickListener(otvorWebView)
         mainView.findViewById<TextView>(R.id.d)?.setOnClickListener(otvorWebView)

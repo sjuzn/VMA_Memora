@@ -74,4 +74,9 @@
     <string name="vectors">Vektory:</string>
     <string name="source_code">Zdrojový  kód:</string>
     <string name="created_within_subject_vma">Vytvorené na predmete VMA na PF UPJŠ</string>
+    <string name="new_moment">Nový moment</string>
+    <string name="title">Názov</string>
+    <string name="notes">Poznámky</string>
+    <string name="select_place">Vybrať miesto</string>
+    <string name="add_tags">Pridať tagy</string>
 </resources>

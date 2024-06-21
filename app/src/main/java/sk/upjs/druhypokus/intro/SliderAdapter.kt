@@ -2,7 +2,6 @@ package sk.upjs.druhypokus.intro
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -19,7 +18,6 @@ import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.PagerAdapter
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.PrefSingleton
-import java.security.AccessController.getContext
 
 
 class SliderAdapter(
@@ -47,7 +45,7 @@ class SliderAdapter(
 
         // below line is use to inflate the
         // layout file which we created.
-        val view: View = layoutInflater.inflate(R.layout.slider_item, container, false)
+        val view: View = layoutInflater.inflate(R.layout.item_slider, container, false)
 
         // on below line we are initializing our image view,
         // heading text view and description text view with their ids.

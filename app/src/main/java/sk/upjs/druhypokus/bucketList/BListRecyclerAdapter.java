@@ -7,20 +7,17 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
-
 import sk.upjs.druhypokus.R;
 
 public class BListRecyclerAdapter extends RecyclerView.Adapter<BListRecyclerAdapter.ViewHolder> {
 
     BListViewModel bListViewModel;
     List<BList> bListList;
-    boolean hotove;
+
 
     public BListRecyclerAdapter(List<BList> bListList, BListViewModel bListViewModel) {
         this.bListList = bListList;
-        this.hotove = hotove;
         this.bListViewModel = bListViewModel;
     }
 
@@ -28,7 +25,7 @@ public class BListRecyclerAdapter extends RecyclerView.Adapter<BListRecyclerAdap
     @Override
     public BListRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.bucket_list_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_bucket_list, parent, false);
         return new BListRecyclerAdapter.ViewHolder(view);
     }
 

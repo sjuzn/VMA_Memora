@@ -26,7 +26,7 @@ public class ReorderMRecyclerAdapter extends RecyclerView.Adapter<ReorderMRecycl
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
-        View view = layoutInflater.inflate(R.layout.row_item_milestone, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_row_milestone, parent, false);
         return new ViewHolder(view);
     }
 

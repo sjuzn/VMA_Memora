@@ -2,19 +2,13 @@ package sk.upjs.druhypokus.milniky
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import sk.upjs.druhypokus.R
-import java.io.FileNotFoundException
-import java.io.InputStream
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -39,7 +33,7 @@ class MilestonesSwipeAdapter (
         val layoutInflater: LayoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        val view: View = layoutInflater.inflate(R.layout.milestone_item, container, false)
+        val view: View = layoutInflater.inflate(R.layout.item_milestone, container, false)
 
         //treba mi potom premenne na tie elementy co tam budu
         val milestoneParent: ConstraintLayout = view.findViewById(R.id.milestoneParent)

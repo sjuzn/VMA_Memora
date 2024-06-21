@@ -73,4 +73,9 @@
     <string name="vectors">Vettori:</string>
     <string name="source_code">Codice sorgente:</string>
     <string name="created_within_subject_vma">Creato nell\'ambito del soggetto VMA presso PF UPJŠ</string>
+    <string name="new_moment">Nuovo momento</string>
+    <string name="title">Titolo</string>
+    <string name="notes">Appunti</string>
+    <string name="select_place">Seleziona luogo</string>
+    <string name="add_tags">Aggiungere etichette</string>
 </resources>

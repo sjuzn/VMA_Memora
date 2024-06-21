@@ -6,7 +6,7 @@
     <string name="slide1_caption">Discover a new way to capture, share, and relive your most cherished memories. Our app allows you to easily document life\'s special moments, whether big or small, and share them with friends and family.</string>
 
     <string name="slide2_nadpis">What is your name?</string>
-    <string name="slide2_caption"> </string>
+    <string name="slide2_caption" translatable="false"> </string>
 
     <string name="slide3_nadpis">Turn on notifications</string>
     <string name="slide3_caption">Receive notfications to get reminded about your anniversaries. We promise not to spam you.</string>
@@ -92,5 +92,10 @@
     <string name="vectors">Vectors:</string>
     <string name="source_code">Source code:</string>
 
+    <string name="new_moment">New moment</string>
+    <string name="title">Title</string>
+    <string name="notes">Notes</string>
+    <string name="select_place">Select place</string>
+    <string name="add_tags">Add tags</string>
 
 </resources>

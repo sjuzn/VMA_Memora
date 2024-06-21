@@ -21,6 +21,7 @@ import sk.upjs.druhypokus.main.NewAppWidget
 import sk.upjs.druhypokus.milniky.Milestone
 import sk.upjs.druhypokus.milniky.MilestonesFragment
 import sk.upjs.druhypokus.milniky.MilestonesViewModel
+import sk.upjs.druhypokus.moments.ui.MomentFragment
 import sk.upjs.druhypokus.settingsAndAbout.AboutFragment
 import sk.upjs.druhypokus.settingsAndAbout.SettingsFragment
 import sk.upjs.druhypokus.welcome.WelcomeFragment
@@ -124,6 +125,13 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
 
             R.id.nav_about -> {
                 val fragment = AboutFragment.newInstance()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commit()
+            }
+
+            R.id.nav_moments -> {
+                val fragment = MomentFragment.newInstance()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
                     .commit()
