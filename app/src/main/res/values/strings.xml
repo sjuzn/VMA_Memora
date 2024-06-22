@@ -97,5 +97,6 @@
     <string name="notes">Notes</string>
     <string name="select_place">Select place</string>
     <string name="add_tags">Add tags</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

@@ -12,11 +12,11 @@ class MomentTagRepository(private val momentTagDao: Moment_Tag_Dao) {
 
 
     fun getTagSMomentami(tag: Tag): Flow<List<TagWithMoments>> {
-        return tag.nazovTag?.let { momentTagDao.getTagSMomentami(it) }!!
+        return momentTagDao.getTagSMomentami(tag.nazovTag.trim())
     }
 
     fun getMomentSTagmi(moment: Moment): Flow<List<MomentWithTags>>  {
-        return moment.idMoment.let { momentTagDao.getMomentSTagmi(it) }
+        return momentTagDao.getMomentSTagmi(moment.idMoment)
     }
 
     suspend fun insertMoment(moment: Moment) {

@@ -134,7 +134,7 @@ class BucketListFragment : Fragment() {
                     (progressTextView.text.toString().split(" ")
                         .get(0)) + (" (" + pocetHotovo + "/" + celkovyPocet + ")")
 
-                val blistRecyclerAdapter = BListRecyclerAdapter(filtrujList(stav), bListViewModel)
+                val blistRecyclerAdapter = BListRecyclerAdapter(filtrujList(stav), bListViewModel, requireContext())
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 recyclerView.adapter = blistRecyclerAdapter
             }

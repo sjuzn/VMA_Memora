@@ -17,10 +17,10 @@ interface Moment_Tag_Dao {
     @Query("SELECT * FROM tags")
     fun getAllTags(): Flow<List<Tag>>
 
-    @Query("SELECT * FROM momenttagcrossref WHERE nazovTag = :nazovTagu")
+    @Query("SELECT * FROM MomentTagCrossRef WHERE nazovTag = :nazovTagu")
     fun getTagSMomentami(nazovTagu: String): Flow<List<TagWithMoments>>
 
-    @Query("SELECT * FROM momenttagcrossref WHERE idMoment = :idMoment")
+    @Query("SELECT * FROM MomentTagCrossRef WHERE idMoment = :idMoment")
     fun getMomentSTagmi(idMoment: Int): Flow<List<MomentWithTags>>
 
 

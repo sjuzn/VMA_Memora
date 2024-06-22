@@ -20,10 +20,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
+import sk.upjs.druhypokus.moments.Moment
+import sk.upjs.druhypokus.moments.MomentTagCrossRef
 import sk.upjs.druhypokus.moments.MomentTagViewModel
+import sk.upjs.druhypokus.moments.Tag
 import java.text.SimpleDateFormat
+import java.util.ArrayList
 import java.util.Calendar
 import java.util.Locale
+import kotlin.math.abs
 
 class AddMomentActivity : AppCompatActivity() {
 
@@ -46,6 +51,9 @@ class AddMomentActivity : AppCompatActivity() {
     private var poznamka: String = ""
     private var datum: String = ""
     private var fotka: String = ""
+    private var latitude: Float = 0.0f
+    private var longitude: Float = 0.0f
+    private var selectedTags: MutableList<String> = mutableListOf()
     //tags
     //map
 
@@ -79,9 +87,13 @@ class AddMomentActivity : AppCompatActivity() {
             finish()
         }
 
-//TODO dokoncit na konci
+        bMap.setOnClickListener {
+            val intent = Intent(this, MapaActivity::class.java)
+            startActivityForResult(intent, 2)
+        }
+
         btSave.setOnClickListener {
-            if ((title == "") or (datum == "") or (fotka == "") or (poznamka == "")) {
+            if ((title == "") or (datum == "") or (fotka == "") or (poznamka == "") or (latitude == 0.0f) or (latitude == 0.0f)) {
                 val txt = TextView(this)
                 txt.text = getString(R.string.unfilled)
 
@@ -92,8 +104,23 @@ class AddMomentActivity : AppCompatActivity() {
                     .show()
 
             } else {
-                //  milestonesViewModel.insert(Milestone(typ, datum, fotka, kto))
-                //  requireActivity().finish()
+
+                val moment = Moment(
+                    title,
+                    poznamka,
+                    fotka,
+                    datum,
+                    latitude,
+                    longitude,
+                    0
+                )
+                momentTagViewModel.insertMoment(moment)
+                for (t in selectedTags) {
+                    momentTagViewModel.insertTag(Tag(t))
+                    momentTagViewModel.insertMomentTagCrossRef(MomentTagCrossRef(moment.idMoment,t))
+                }
+
+                finish()
             }
         }
 
@@ -179,15 +206,14 @@ class AddMomentActivity : AppCompatActivity() {
         }
     }
 
-    private var selectedTags: MutableList<String> = mutableListOf()
-
     @Deprecated("")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        //toto su tagy
+        if (requestCode == 1) {
+            val tags: ArrayList<String>? = data?.getStringArrayListExtra("selectedTags")
 
-        if (requestCode == 1) {//tu to ide
-            val tags = data?.getStringArrayListExtra("selectedTags")
             tags?.let {
                 selectedTags.clear()
                 selectedTags.addAll(it)
@@ -196,6 +222,23 @@ class AddMomentActivity : AppCompatActivity() {
                 bTags.text = selectedTags.joinToString(", ")
             }
         }
+
+        //toto je mapa
+        if (requestCode == 2) {
+            latitude = data?.getFloatExtra("latitude", 0.0f)!!
+            longitude = data.getFloatExtra("longitude", 0.0f)
+            bMap.text = formatCoordinates(latitude, longitude)
+        }
+    }
+
+    private fun formatCoordinates(latitude: Float, longitude: Float): String {
+        val latDirection = if (latitude >= 0) "N" else "S"
+        val lonDirection = if (longitude >= 0) "E" else "W"
+
+        val formattedLatitude = String.format("%.5f° %s", abs(latitude), latDirection)
+        val formattedLongitude = String.format("%.5f° %s", abs(longitude), lonDirection)
+
+        return "$formattedLatitude\n$formattedLongitude"
     }
 
     private fun selectImage() {
