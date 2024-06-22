@@ -20,12 +20,12 @@
             android:id="@+id/nav_moments"
             android:icon="@drawable/ic_menu_moments"
             android:title="@string/menu_moments" />
-
+<!--
         <item
             android:id="@+id/nav_capsules"
             android:icon="@drawable/ic_menu_capsules"
             android:title="@string/menu_capsules" />
-
+-->
         <item
             android:id="@+id/nav_list"
             android:icon="@drawable/ic_menu_memo"

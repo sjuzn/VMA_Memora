@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/poadie_abstract"
-    tools:context=".moments.ui.AddMomentActivity">
+    tools:context=".moments.ui.AddTagActivity">
 
     <LinearLayout
         android:id="@+id/linearLayoutHeader"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/new_moment"
+            android:text="@string/add_tags"
             android:textSize="35sp" />
     </LinearLayout>
 
@@ -67,11 +67,11 @@
             android:background="@drawable/button_milestones"
             android:drawableLeft="@drawable/pencil_smaller"
             android:ellipsize="end"
-            android:text=""
             android:gravity="start|center_vertical"
             android:hint="@string/notes"
             android:padding="7dp"
             android:singleLine="true"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="15sp" />
 

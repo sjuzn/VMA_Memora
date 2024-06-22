@@ -119,10 +119,6 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
                     .commit()
             }
 
-            R.id.nav_capsules -> {
-                Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
-            }
-
             R.id.nav_about -> {
                 val fragment = AboutFragment.newInstance()
                 supportFragmentManager.beginTransaction()
