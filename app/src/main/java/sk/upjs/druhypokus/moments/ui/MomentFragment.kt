@@ -8,21 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asFlow
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import sk.upjs.druhypokus.MainActivity
 import sk.upjs.druhypokus.R
-import sk.upjs.druhypokus.bucketList.BList
-import sk.upjs.druhypokus.bucketList.BListRecyclerAdapter
-import sk.upjs.druhypokus.bucketList.BListViewModel
-import sk.upjs.druhypokus.bucketList.BucketListFragment
 import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.moments.MomentTagViewModel
 
@@ -31,6 +24,8 @@ class MomentFragment : Fragment() {
     private val momentTagViewModel: MomentTagViewModel by viewModels {
         MomentTagViewModel.MomentTagViewModelFactory((requireActivity().application as MemoraApplication).momentTagRepository)
     }
+
+    lateinit var v : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,18 +36,18 @@ class MomentFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        val view = inflater.inflate(R.layout.fragment_moment, container, false)
+        v = inflater.inflate(R.layout.fragment_moment, container, false)
 
-        view.findViewById<ImageButton>(R.id.btAdd).setOnClickListener{
+        v.findViewById<ImageButton>(R.id.btAdd).setOnClickListener{
             val intent = Intent(requireContext(), AddMomentActivity::class.java)
             startActivity(intent)
         }
 
         inicializujChipsy()
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val recyclerView = v.findViewById<RecyclerView>(R.id.recyclerView)
         momentTagViewModel.allMoments.observe(viewLifecycleOwner) { list ->
             val momentRecyclerAdapter = MomentRecyclerAdapter( list, requireContext())
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -68,12 +63,12 @@ class MomentFragment : Fragment() {
         )
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        return view
+        return v
     }
 
     private fun inicializujChipsy(){
 
-        val chipGroup = view?.findViewById<ChipGroup>(R.id.chipGroup)
+        val chipGroup = v.findViewById<ChipGroup>(R.id.chipGroup)
 
         momentTagViewModel.allTags.observe(viewLifecycleOwner){
             for (tag in it){

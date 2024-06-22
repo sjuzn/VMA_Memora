@@ -47,96 +47,25 @@
         android:padding="40dp"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutHeader">
 
-        <Button
-            android:id="@+id/bTitle"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputTag"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_milestones"
-            android:drawableLeft="@drawable/milestones_smaller"
-            android:gravity="start|center_vertical"
-            android:hint="@string/title"
-            android:padding="7dp"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/bText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_milestones"
-            android:drawableLeft="@drawable/pencil_smaller"
-            android:ellipsize="end"
-            android:gravity="start|center_vertical"
-            android:hint="@string/notes"
-            android:padding="7dp"
-            android:singleLine="true"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/bPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_milestones"
-            android:drawableLeft="@drawable/moments_smaller"
-            android:gravity="start|center_vertical"
-            android:hint="@string/select_picture"
-            android:padding="7dp"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/bDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_milestones"
-            android:backgroundTint="@color/cervena_tmava_zosvetlena"
-            android:drawableLeft="@drawable/calendar_smaller"
-            android:gravity="start|center_vertical"
-            android:hint="@string/select_the_date"
-            android:padding="7dp"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/bMap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_milestones"
-            android:backgroundTint="@color/cervena_tmava_zosvetlena"
-            android:drawableLeft="@drawable/map"
-            android:gravity="start|center_vertical"
-            android:hint="@string/select_place"
-            android:padding="7dp"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/bTags"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_milestones"
-            android:backgroundTint="@color/cervena_tmava_zosvetlena"
-            android:drawableLeft="@drawable/tag"
-            android:gravity="start|center_vertical"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
             android:hint="@string/add_tags"
-            android:padding="7dp"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:imeOptions="actionGo"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:singleLine="true" />
 
-        <Button
-            android:id="@+id/btSave"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:backgroundTint="@color/cervena_tmava"
-            android:text="@string/save" />
+            android:textAlignment="center"
+            app:chipSpacingVertical="-5dp" />
 
 
     </LinearLayout>

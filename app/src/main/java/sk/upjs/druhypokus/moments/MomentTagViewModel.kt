@@ -1,6 +1,7 @@
 package sk.upjs.druhypokus.moments
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -11,6 +12,19 @@ class MomentTagViewModel(private val repository: MomentTagRepository) : ViewMode
 
     val allMoments = repository.allMoments.asLiveData()
     val allTags = repository.allTags.asLiveData()
+
+    private val _selectedTags = MutableLiveData<Set<String>>(emptySet())
+    val selectedTags: LiveData<Set<String>> get() = _selectedTags
+
+    fun toggleTagSelection(tag: String) {
+        val currentSelection = _selectedTags.value ?: emptySet()
+        _selectedTags.value = if (currentSelection.contains(tag)) {
+            currentSelection - tag
+        } else {
+            currentSelection + tag
+        }
+    }
+
 
     fun getTagSMomentami(tag: Tag): LiveData<List<TagWithMoments>> {
         return repository.getTagSMomentami(tag).asLiveData()

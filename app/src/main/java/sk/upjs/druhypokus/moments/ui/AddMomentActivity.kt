@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.text.Editable
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -17,10 +18,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
-import sk.upjs.druhypokus.milniky.Milestone
 import sk.upjs.druhypokus.moments.MomentTagViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -47,7 +46,7 @@ class AddMomentActivity : AppCompatActivity() {
     private var poznamka: String = ""
     private var datum: String = ""
     private var fotka: String = ""
-   //tags
+    //tags
     //map
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,8 +92,8 @@ class AddMomentActivity : AppCompatActivity() {
                     .show()
 
             } else {
-              //  milestonesViewModel.insert(Milestone(typ, datum, fotka, kto))
-              //  requireActivity().finish()
+                //  milestonesViewModel.insert(Milestone(typ, datum, fotka, kto))
+                //  requireActivity().finish()
             }
         }
 
@@ -120,9 +119,9 @@ class AddMomentActivity : AppCompatActivity() {
         bText.setOnClickListener {
             val txt = EditText(this)
             txt.height = 1000
-            if(bText.text != ""){
+            if (bText.text != "") {
                 txt.text = Editable.Factory.getInstance().newEditable(bText.text)
-            }else{
+            } else {
                 txt.hint = bText.hint
             }
 
@@ -170,8 +169,32 @@ class AddMomentActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
+        bTags.setOnClickListener {
+            val intent = Intent(this, AddTagActivity::class.java)
+            startActivityForResult(intent, 1)
+        }
+
         bPhoto.setOnClickListener {
             selectImage()
+        }
+    }
+
+    private var selectedTags: MutableList<String> = mutableListOf()
+
+    @Deprecated("")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+        if (requestCode == 1) {//tu to ide
+            val tags = data?.getStringArrayListExtra("selectedTags")
+            tags?.let {
+                selectedTags.clear()
+                selectedTags.addAll(it)
+
+                // Tu môžete aktualizovať zobrazenie tlačidla alebo robiť iné operácie s vybranými tagmi
+                bTags.text = selectedTags.joinToString(", ")
+            }
         }
     }
 
