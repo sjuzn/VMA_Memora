@@ -24,6 +24,9 @@
         android:theme="@style/Theme.DruhyPokus"
         tools:targetApi="31">
         <activity
+            android:name=".moments.ui.ShowMomentActivity"
+            android:exported="false" />
+        <activity
             android:name=".moments.ui.MapaActivity"
             android:exported="false" />
         <activity

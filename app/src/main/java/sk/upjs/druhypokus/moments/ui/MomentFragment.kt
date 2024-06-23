@@ -5,12 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,12 +21,16 @@ import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
+import sk.upjs.druhypokus.moments.Moment
 import sk.upjs.druhypokus.moments.MomentTagViewModel
+import sk.upjs.druhypokus.moments.MomentWithTags
 import sk.upjs.druhypokus.moments.Tag
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class MomentFragment : Fragment() {
 
-    private val momentTagViewModel: MomentTagViewModel by viewModels {
+    val momentTagViewModel: MomentTagViewModel by viewModels {
         MomentTagViewModel.MomentTagViewModelFactory((requireActivity().application as MemoraApplication).momentTagRepository)
     }
 
@@ -62,7 +67,7 @@ class MomentFragment : Fragment() {
         }
 
         val itemTouchHelper = ItemTouchHelper(
-            MomentFragment.MySimpleCallback(
+            MySimpleCallback(
                 this,
                 ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
                 ItemTouchHelper.END
@@ -143,8 +148,40 @@ class MomentFragment : Fragment() {
         ): Boolean {
             return false
         }
-
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+            val position = viewHolder.adapterPosition
+            val zoznam: MutableList<Moment> = mutableListOf()
+
+            (fragment as MomentFragment).momentTagViewModel.allMoments.observe(fragment.viewLifecycleOwner) { moments ->
+                zoznam.clear()
+                zoznam.addAll(moments)
+            }
+
+            sortMomentsByDateDescending(zoznam)
+
+            val chcemZmazat = zoznam[position]
+
+            fragment.momentTagViewModel.getMomentSTagmi(chcemZmazat).observe(fragment.viewLifecycleOwner) { momentWithTagsList ->
+                val tagyKuMomentu: MutableList<MomentWithTags> = momentWithTagsList.toMutableList()
+
+                for(t in tagyKuMomentu){
+                    for (konkretny in t.tags){
+                        fragment.momentTagViewModel.deleteMomentTagCrossRefs(konkretny,chcemZmazat)
+                        fragment.momentTagViewModel.deleteTag(konkretny)
+                    }
+                }
+                fragment.momentTagViewModel.deleteMoment(chcemZmazat)
+            }
+        }
+
+        private fun sortMomentsByDateDescending(momentList: MutableList<Moment>) {
+            val comparator = Comparator<Moment> { moment1, moment2 ->
+                val date1 = LocalDate.parse(moment1.datum, DateTimeFormatter.ISO_DATE)
+                val date2 = LocalDate.parse(moment2.datum, DateTimeFormatter.ISO_DATE)
+                date2.compareTo(date1)
+            }
+            momentList.sortWith(comparator)
         }
     }
 

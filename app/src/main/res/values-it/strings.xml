@@ -78,4 +78,5 @@
     <string name="notes">Appunti</string>
     <string name="select_place">Seleziona luogo</string>
     <string name="add_tags">Aggiungere etichette</string>
+    <string name="show_location">Mostra posizione</string>
 </resources>

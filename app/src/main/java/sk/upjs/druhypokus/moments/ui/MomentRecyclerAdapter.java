@@ -1,6 +1,7 @@
 package sk.upjs.druhypokus.moments.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -26,6 +28,9 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
 
     private final List<Moment> momentList;
     private final Context context;
+
+    public static Moment m;
+    public static Context c;
 
 
     public MomentRecyclerAdapter(List<Moment> momentList, Context context) {
@@ -44,7 +49,10 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull MomentRecyclerAdapter.ViewHolder holder, int position) {
+        c = context;
         if (!momentList.isEmpty()) {
+            m = momentList.get(position);
+
             holder.nazovTextView.setText(momentList.get(position).getNazov());
 
             LocalDate datumObj = LocalDate.parse(momentList.get(position).getDatum(), DateTimeFormatter.ISO_DATE);
@@ -53,7 +61,6 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
             String novyFormat = datumObj.format(formatter);
 
             holder.datumTextView.setText(novyFormat);
-
         }
     }
 
@@ -63,7 +70,6 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         TextView datumTextView;
         TextView nazovTextView;
         ImageView imageViewMoment;
@@ -80,6 +86,9 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
 
         @Override
         public void onClick(View view) {
+            Intent intent = new Intent(c, ShowMomentActivity.class);
+            intent.putExtra("moment", m);
+            c.startActivity(intent);
         }
     }
 

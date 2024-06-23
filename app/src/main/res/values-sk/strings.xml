@@ -79,4 +79,5 @@
     <string name="notes">Poznámky</string>
     <string name="select_place">Vybrať miesto</string>
     <string name="add_tags">Pridať tagy</string>
+    <string name="show_location">Ukáž miesto</string>
 </resources>
