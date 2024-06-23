@@ -1,5 +1,6 @@
 package sk.upjs.druhypokus.moments.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import sk.upjs.druhypokus.moments.Entity.Moment;
 
 public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAdapter.ViewHolder> {
 
-    private final List<Moment> momentList;
+    private List<Moment> momentList;
     private final Context context;
 
     public static Moment m;
@@ -34,6 +35,14 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
         sortMomentsByDateDescending(this.momentList);
         this.context = context;
     }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateMoments(List<Moment> newMoments){
+        momentList = newMoments;
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override

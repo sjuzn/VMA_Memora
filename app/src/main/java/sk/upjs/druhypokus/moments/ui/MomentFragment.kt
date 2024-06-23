@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,8 +35,10 @@ class MomentFragment : Fragment() {
     }
 
     private lateinit var v: View
-    private lateinit var recyclerView : RecyclerView
-    private var activeFilters : MutableList<String> = mutableListOf()
+    private lateinit var recyclerView: RecyclerView
+    private var activeFilters: MutableList<String> = mutableListOf()
+
+    private var zobrazujem: List<Moment> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +63,7 @@ class MomentFragment : Fragment() {
         recyclerView = v.findViewById(R.id.recyclerView)
 
         momentTagViewModel.allMoments.observe(viewLifecycleOwner) { list ->
-            val momentRecyclerAdapter = MomentRecyclerAdapter(list,requireContext())
+            val momentRecyclerAdapter = MomentRecyclerAdapter(list, requireContext())
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             recyclerView.adapter = momentRecyclerAdapter
         }
@@ -106,75 +109,44 @@ class MomentFragment : Fragment() {
             setChipBackgroundColorResource(R.color.cervena_tmava_zosvetlena)
 
             setOnCheckedChangeListener { _, isChecked ->
+
                 if (isChecked) {
                     setChipBackgroundColorResource(R.color.cervena_tmava)
                     activeFilters.add(this.text.toString())
+
+                    momentTagViewModel.allMoments.observe(viewLifecycleOwner) { list ->
+                        (recyclerView.adapter as MomentRecyclerAdapter).updateMoments(list)
+                        // zobrazujem = list.toMutableList()
+                    }
 
                 } else {
                     setChipBackgroundColorResource(R.color.cervena_tmava_zosvetlena)
                     activeFilters.remove(this.text.toString())
 
-                    //recyclerView.adapter?.notifyDataSetChanged()
-                }
+                    if (activeFilters.isEmpty()) {
+                        momentTagViewModel.allMoments.observe(viewLifecycleOwner) { list ->
+                            (recyclerView.adapter as MomentRecyclerAdapter).updateMoments(list)
 
-                activeFilters.forEach { filter ->
-                    momentTagViewModel.getTagSMomentami(Tag(filter)).observe(viewLifecycleOwner) { tagWithMomentsList ->
-
-                        tagWithMomentsList.forEach { tagWithMoment ->
-                            val moments = tagWithMoment.moments
-                            Log.i("MOMENTY", moments.toString())
                         }
                     }
                 }
-            }
-        }
-    }
 
-    class MySimpleCallback(
-        private val fragment: Fragment,
-        dragDirs: Int,
-        swipeDirs: Int
-    ) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
+                if (activeFilters.isNotEmpty()) {
+                    var zobrazujem: MutableSet<Moment> = mutableSetOf()
 
-        override fun onMove(
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder,
-            target: RecyclerView.ViewHolder
-        ): Boolean {
-            return false
-        }
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
-            val position = viewHolder.adapterPosition
-            val zoznam: MutableList<Moment> = mutableListOf()
-
-            (fragment as MomentFragment).momentTagViewModel.allMoments.observe(fragment.viewLifecycleOwner) { moments ->
-                zoznam.clear()
-                zoznam.addAll(moments)
-            }
-
-            sortMomentsByDateDescending(zoznam)
-            val chcemZmazat = zoznam[position]
-
-            fragment.momentTagViewModel.getMomentSTagmi(chcemZmazat).observe(fragment.viewLifecycleOwner) { momentWithTagsList ->
-                val tagyKuMomentu: MutableList<MomentWithTags> = momentWithTagsList.toMutableList()
-
-                for(t in tagyKuMomentu){
-                    for (konkretny in t.tags){
-                        fragment.momentTagViewModel.deleteMomentTagCrossRefs(konkretny,chcemZmazat)
+                    activeFilters.forEach { filter ->
+                        momentTagViewModel.getTagSMomentami(Tag(filter))
+                            .observe(viewLifecycleOwner) { tagWithMomentsList ->
+                                if (tagWithMomentsList.isNotEmpty()) {
+                                    tagWithMomentsList.first().moments.forEach { m ->
+                                        zobrazujem.add(m)
+                                    }
+                                }
+                                (recyclerView.adapter as MomentRecyclerAdapter).updateMoments(zobrazujem.toMutableList())
+                            }
                     }
                 }
-                fragment.momentTagViewModel.deleteMoment(chcemZmazat)
             }
-        }
-
-        private fun sortMomentsByDateDescending(momentList: MutableList<Moment>) {
-            val comparator = Comparator<Moment> { moment1, moment2 ->
-                val date1 = LocalDate.parse(moment1.datum, DateTimeFormatter.ISO_DATE)
-                val date2 = LocalDate.parse(moment2.datum, DateTimeFormatter.ISO_DATE)
-                date2.compareTo(date1)
-            }
-            momentList.sortWith(comparator)
         }
     }
 
@@ -182,8 +154,57 @@ class MomentFragment : Fragment() {
         @JvmStatic
         fun newInstance() =
             MomentFragment().apply {
-                arguments = Bundle().apply {
-                }
+                arguments = Bundle().apply {}
             }
+    }
+}
+
+class MySimpleCallback(
+    private val fragment: Fragment,
+    dragDirs: Int,
+    swipeDirs: Int
+) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
+
+    override fun onMove(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        target: RecyclerView.ViewHolder
+    ): Boolean {
+        return false
+    }
+
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+        val position = viewHolder.adapterPosition
+        val zoznam: MutableList<Moment> = mutableListOf()
+
+        (fragment as MomentFragment).momentTagViewModel.allMoments.observe(fragment.viewLifecycleOwner) { moments ->
+            zoznam.clear()
+            zoznam.addAll(moments)
+        }
+
+        sortMomentsByDateDescending(zoznam)
+        val chcemZmazat = zoznam[position]
+
+        fragment.momentTagViewModel.getMomentSTagmi(chcemZmazat)
+            .observe(fragment.viewLifecycleOwner) { momentWithTagsList ->
+                val tagyKuMomentu: MutableList<MomentWithTags> = momentWithTagsList.toMutableList()
+
+                for (t in tagyKuMomentu) {
+                    for (konkretny in t.tags) {
+                        fragment.momentTagViewModel.deleteMomentTagCrossRefs(konkretny, chcemZmazat)
+                    }
+                }
+                fragment.momentTagViewModel.deleteMoment(chcemZmazat)
+            }
+    }
+
+    private fun sortMomentsByDateDescending(momentList: MutableList<Moment>) {
+        val comparator = Comparator<Moment> { moment1, moment2 ->
+            val date1 = LocalDate.parse(moment1.datum, DateTimeFormatter.ISO_DATE)
+            val date2 = LocalDate.parse(moment2.datum, DateTimeFormatter.ISO_DATE)
+            date2.compareTo(date1)
+        }
+        momentList.sortWith(comparator)
     }
 }
