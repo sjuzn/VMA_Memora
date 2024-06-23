@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import sk.upjs.druhypokus.R
 
 
-//https://www.geeksforgeeks.org/how-to-use-webview-in-android/
+// https://www.geeksforgeeks.org/how-to-use-webview-in-android/
 
 class AboutFragment : Fragment() {
 
@@ -63,7 +63,7 @@ class AboutFragment : Fragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    val otvorWebView: OnClickListener = View.OnClickListener { view ->
+    val otvorWebView: OnClickListener = OnClickListener { view ->
 
         val info = mainView.findViewById<LinearLayout>(R.id.info)
         info.visibility = View.INVISIBLE

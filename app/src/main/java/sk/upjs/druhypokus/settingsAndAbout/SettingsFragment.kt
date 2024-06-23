@@ -94,6 +94,14 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        //zapnuta
+        if(PrefSingleton.getInstance().getPreferenceBoolean("hudba")){
+            textView5.text = getString(R.string.turn_on_music)
+        }else{
+            //vypnuta
+            textView5.text = getString(R.string.turn_off_music)
+        }
+
         return view
     }
 /*

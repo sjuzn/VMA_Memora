@@ -2,20 +2,15 @@ package sk.upjs.druhypokus.moments.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
-import sk.upjs.druhypokus.MainActivity
 import sk.upjs.druhypokus.R
-import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.moments.MomentTagViewModel
 import sk.upjs.druhypokus.moments.Tag
 
@@ -43,7 +38,7 @@ class ChipGroupAdapter(
             if (!selectedTags.contains(tag)) {
                 val vibe: Vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                 val effect: VibrationEffect =
-                    VibrationEffect.createOneShot(300, VibrationEffect.EFFECT_HEAVY_CLICK);
+                    VibrationEffect.createOneShot(300, VibrationEffect.EFFECT_HEAVY_CLICK)
                 vibe.vibrate(effect)
 
                 val builder = AlertDialog.Builder(context)
@@ -68,6 +63,7 @@ class ChipGroupAdapter(
         return chips.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setTags(newChips: List<Tag>) {
         chips = newChips
         notifyDataSetChanged()
