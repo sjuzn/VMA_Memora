@@ -3,6 +3,7 @@ package sk.upjs.druhypokus.moments.ui;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,23 +27,18 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
     private List<Moment> momentList;
     private final Context context;
 
-    public static Moment m;
-    public static Context c;
-
-
     public MomentRecyclerAdapter(List<Moment> momentList, Context context) {
         this.momentList = momentList;
         sortMomentsByDateDescending(this.momentList);
         this.context = context;
     }
 
-
     @SuppressLint("NotifyDataSetChanged")
     public void updateMoments(List<Moment> newMoments){
         momentList = newMoments;
+        sortMomentsByDateDescending(this.momentList);
         notifyDataSetChanged();
     }
-
 
     @NonNull
     @Override
@@ -54,19 +50,23 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull MomentRecyclerAdapter.ViewHolder holder, int position) {
-        c = context;
-        if (!momentList.isEmpty()) {
-            m = momentList.get(position);
+        Moment moment = momentList.get(position);
 
-            holder.nazovTextView.setText(momentList.get(position).getNazov());
+        holder.nazovTextView.setText(moment.getNazov());
 
-            LocalDate datumObj = LocalDate.parse(momentList.get(position).getDatum(), DateTimeFormatter.ISO_DATE);
-            Locale locale = context.getResources().getConfiguration().locale;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d. MMMM \n yyyy", locale);
-            String novyFormat = datumObj.format(formatter);
+        LocalDate datumObj = LocalDate.parse(moment.getDatum(), DateTimeFormatter.ISO_DATE);
+        Locale locale = context.getResources().getConfiguration().locale;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d. MMMM \n yyyy", locale);
+        String novyFormat = datumObj.format(formatter);
 
-            holder.datumTextView.setText(novyFormat);
-        }
+        holder.datumTextView.setText(novyFormat);
+
+        holder.imageViewMoment.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ShowMomentActivity.class);
+            Log.d("NEVIEM", moment.toString());
+            intent.putExtra("moment", moment);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -91,14 +91,11 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(c, ShowMomentActivity.class);
-            intent.putExtra("moment", m);
-            c.startActivity(intent);
+            // Handle item click if necessary
         }
     }
 
     public static void sortMomentsByDateDescending(List<Moment> momentList) {
-
         Comparator<Moment> comparator = (moment1, moment2) -> {
             LocalDate date1 = LocalDate.parse(moment1.getDatum(), DateTimeFormatter.ISO_DATE);
             LocalDate date2 = LocalDate.parse(moment2.getDatum(), DateTimeFormatter.ISO_DATE);
