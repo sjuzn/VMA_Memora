@@ -48,6 +48,7 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
         return new MomentRecyclerAdapter.ViewHolder(view);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull MomentRecyclerAdapter.ViewHolder holder, int position) {
         Moment moment = momentList.get(position);
@@ -66,6 +67,7 @@ public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAd
             Log.d("NEVIEM", moment.toString());
             intent.putExtra("moment", moment);
             context.startActivity(intent);
+            notifyDataSetChanged();
         });
     }
 

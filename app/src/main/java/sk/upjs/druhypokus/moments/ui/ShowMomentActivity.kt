@@ -1,21 +1,26 @@
 package sk.upjs.druhypokus.moments.ui
 
+import android.R.attr.path
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.moments.Entity.Moment
-import sk.upjs.druhypokus.moments.MomentTagViewModel
 import sk.upjs.druhypokus.moments.Entity.MomentWithTags
+import sk.upjs.druhypokus.moments.MomentTagViewModel
+import java.io.File
 
 
 class ShowMomentActivity : AppCompatActivity() {
@@ -70,5 +75,13 @@ class ShowMomentActivity : AppCompatActivity() {
 
         val obrazok = findViewById<ImageView>(R.id.fotka)
         val fotkaHeader = findViewById<ImageView>(R.id.fotkaHeader)
+/*
+        contentResolver.openInputStream(Uri.parse(moment.fotka))?.bufferedReader()?.forEachLine {
+            val toast = Toast.makeText(applicationContext, it, Toast.LENGTH_SHORT)
+            toast.show()
+        }
+
+*/
+
     }
 }

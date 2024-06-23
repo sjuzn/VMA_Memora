@@ -1,7 +1,5 @@
 package sk.upjs.druhypokus.main
 
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

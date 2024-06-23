@@ -73,7 +73,7 @@ class SliderAdapter(
             //var allowNotifyBtn: Button = view.findViewById(R.id.idBtnTurnOn)
             (view.findViewById<Button>(R.id.idBtnTurnOn)!!).setOnClickListener{
                 ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
-                ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
+                ActivityCompat.requestPermissions(context, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
             }
         }
 
@@ -85,7 +85,7 @@ class SliderAdapter(
         }
 
         if(position == 1){
-            var menoInput : EditText = view.findViewById(R.id.input_meno)
+            val menoInput : EditText = view.findViewById(R.id.input_meno)
             menoInput.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     PrefSingleton.getInstance().writePreference("meno", menoInput.text.toString());

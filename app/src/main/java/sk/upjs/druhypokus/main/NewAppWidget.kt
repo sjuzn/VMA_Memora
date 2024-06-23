@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.widget.RemoteViews
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import sk.upjs.druhypokus.R
@@ -29,7 +28,7 @@ class NewAppWidget : AppWidgetProvider() {
         val milestonesViewModel = ViewModelProvider(
             ViewModelStore(),
             factory
-        ).get(MilestonesViewModel::class.java)
+        )[MilestonesViewModel::class.java]
 
         // Fetch the latest milestones and update the widget
         milestonesViewModel.milestones.observeForever { milestones ->

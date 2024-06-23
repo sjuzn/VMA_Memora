@@ -6,8 +6,7 @@ import android.preference.PreferenceManager;
 
 public class PrefSingleton{
     private static PrefSingleton mInstance;
-    private Context mContext;
-    //
+
     private SharedPreferences mMyPreferences;
 
     private PrefSingleton(){ }
@@ -18,9 +17,8 @@ public class PrefSingleton{
     }
 
     public void Initialize(Context ctxt){
-        mContext = ctxt;
         //
-        mMyPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mMyPreferences = PreferenceManager.getDefaultSharedPreferences(ctxt);
     }
 
     public void writePreference(String key, String value){

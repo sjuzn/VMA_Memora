@@ -96,7 +96,7 @@ class BucketListFragment : Fragment() {
     private fun filtrujList(stav: Boolean): List<BList> {
 
         val blist = bListViewModel.bList
-        var novyList = mutableListOf<BList>()
+        val novyList = mutableListOf<BList>()
 
         blist.observe(viewLifecycleOwner) { bList ->
 
@@ -171,7 +171,7 @@ class BucketListFragment : Fragment() {
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val position = viewHolder.adapterPosition
-            var relevantnyZoznam =
+            val relevantnyZoznam =
                 (fragment as BucketListFragment).filtrujList(!fragment.active)
 
             val chcemVymazat = relevantnyZoznam[position]

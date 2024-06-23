@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,8 +35,6 @@ class MomentFragment : Fragment() {
     private lateinit var v: View
     private lateinit var recyclerView: RecyclerView
     private var activeFilters: MutableList<String> = mutableListOf()
-
-    private var zobrazujem: List<Moment> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,7 +128,7 @@ class MomentFragment : Fragment() {
                 }
 
                 if (activeFilters.isNotEmpty()) {
-                    var zobrazujem: MutableSet<Moment> = mutableSetOf()
+                    val zobrazujem: MutableSet<Moment> = mutableSetOf()
 
                     activeFilters.forEach { filter ->
                         momentTagViewModel.getTagSMomentami(Tag(filter))
