@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.moments.MomentTagViewModel
-import sk.upjs.druhypokus.moments.Tag
+import sk.upjs.druhypokus.moments.Entity.Tag
 
 
 class ChipGroupAdapter(

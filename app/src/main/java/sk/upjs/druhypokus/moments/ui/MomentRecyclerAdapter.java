@@ -11,18 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import sk.upjs.druhypokus.R;
-import sk.upjs.druhypokus.moments.Moment;
-import sk.upjs.druhypokus.moments.MomentTagCrossRef;
+import sk.upjs.druhypokus.moments.Entity.Moment;
 
 public class MomentRecyclerAdapter extends RecyclerView.Adapter<MomentRecyclerAdapter.ViewHolder> {
 

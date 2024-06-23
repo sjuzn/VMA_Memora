@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,10 +20,10 @@ import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
-import sk.upjs.druhypokus.moments.Moment
+import sk.upjs.druhypokus.moments.Entity.Moment
 import sk.upjs.druhypokus.moments.MomentTagViewModel
-import sk.upjs.druhypokus.moments.MomentWithTags
-import sk.upjs.druhypokus.moments.Tag
+import sk.upjs.druhypokus.moments.Entity.MomentWithTags
+import sk.upjs.druhypokus.moments.Entity.Tag
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -121,16 +120,12 @@ class MomentFragment : Fragment() {
                 activeFilters.forEach { filter ->
                     momentTagViewModel.getTagSMomentami(Tag(filter)).observe(viewLifecycleOwner) { tagWithMomentsList ->
 
-                        Log.i("MOMENTY", tagWithMomentsList.toString())
-
                         tagWithMomentsList.forEach { tagWithMoment ->
                             val moments = tagWithMoment.moments
-                            //Log.i("MOMENTY", moments.toString())
+                            Log.i("MOMENTY", moments.toString())
                         }
                     }
                 }
-
-
             }
         }
     }
@@ -159,7 +154,6 @@ class MomentFragment : Fragment() {
             }
 
             sortMomentsByDateDescending(zoznam)
-
             val chcemZmazat = zoznam[position]
 
             fragment.momentTagViewModel.getMomentSTagmi(chcemZmazat).observe(fragment.viewLifecycleOwner) { momentWithTagsList ->
@@ -168,7 +162,6 @@ class MomentFragment : Fragment() {
                 for(t in tagyKuMomentu){
                     for (konkretny in t.tags){
                         fragment.momentTagViewModel.deleteMomentTagCrossRefs(konkretny,chcemZmazat)
-                        fragment.momentTagViewModel.deleteTag(konkretny)
                     }
                 }
                 fragment.momentTagViewModel.deleteMoment(chcemZmazat)

@@ -1,29 +1,20 @@
 package sk.upjs.druhypokus.moments.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
 import sk.upjs.druhypokus.moments.MomentTagViewModel
-import sk.upjs.druhypokus.moments.Tag
-import java.io.Serializable
+import sk.upjs.druhypokus.moments.Entity.Tag
 
 
 class AddTagActivity : AppCompatActivity() {

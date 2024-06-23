@@ -2,8 +2,12 @@ package sk.upjs.druhypokus.moments
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import sk.upjs.druhypokus.moments.Entity.Moment
+import sk.upjs.druhypokus.moments.Entity.MomentTagCrossRef
+import sk.upjs.druhypokus.moments.Entity.MomentWithTags
+import sk.upjs.druhypokus.moments.Entity.Tag
+import sk.upjs.druhypokus.moments.Entity.TagWithMoments
 
 class MomentTagRepository(private val momentTagDao: Moment_Tag_Dao) {
 
@@ -19,8 +23,8 @@ class MomentTagRepository(private val momentTagDao: Moment_Tag_Dao) {
         return momentTagDao.getMomentSTagmi(moment.idMoment)
     }
 
-    suspend fun insertMoment(moment: Moment) {
-        momentTagDao.insertMoment(moment)
+    suspend fun insertMoment(moment: Moment) : Long {
+        return momentTagDao.insertMoment(moment)
     }
 
     suspend fun insertTag(tag: Tag) {

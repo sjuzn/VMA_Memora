@@ -11,10 +11,10 @@ import sk.upjs.druhypokus.bucketList.BList
 import sk.upjs.druhypokus.bucketList.BListDao
 import sk.upjs.druhypokus.milniky.MilestonesDao
 import sk.upjs.druhypokus.milniky.Milestone
-import sk.upjs.druhypokus.moments.Moment
-import sk.upjs.druhypokus.moments.MomentTagCrossRef
+import sk.upjs.druhypokus.moments.Entity.Moment
+import sk.upjs.druhypokus.moments.Entity.MomentTagCrossRef
 import sk.upjs.druhypokus.moments.Moment_Tag_Dao
-import sk.upjs.druhypokus.moments.Tag
+import sk.upjs.druhypokus.moments.Entity.Tag
 import java.util.UUID
 
 @Database(

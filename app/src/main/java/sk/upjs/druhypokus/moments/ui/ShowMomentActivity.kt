@@ -13,9 +13,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
-import sk.upjs.druhypokus.moments.Moment
+import sk.upjs.druhypokus.moments.Entity.Moment
 import sk.upjs.druhypokus.moments.MomentTagViewModel
-import sk.upjs.druhypokus.moments.MomentWithTags
+import sk.upjs.druhypokus.moments.Entity.MomentWithTags
 
 
 class ShowMomentActivity : AppCompatActivity() {
@@ -46,15 +46,13 @@ class ShowMomentActivity : AppCompatActivity() {
         momentTagViewModel.getMomentSTagmi(moment).observe(this) { momentWithTagsList ->
             val tagyKuMomentu: MutableList<MomentWithTags> = momentWithTagsList.toMutableList()
 
-//TODO S VYBEROM JE DACO SPATNE, FIXNUT ESTE
-
             Log.i("TAGY", tagyKuMomentu.toString())
 
-            for(t in tagyKuMomentu){
-                for (konkretny in t.tags){
-                    tagyTw.text = tagyTw.text.toString() + ", " + konkretny.nazovTag
+            for(t in tagyKuMomentu.first().tags){
+               //for (konkretny in t.tags){
+                    tagyTw.text = tagyTw.text.toString() + " " + t.nazovTag
 
-                }
+                //}
             }
         }
 

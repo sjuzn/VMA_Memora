@@ -5,8 +5,12 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import sk.upjs.druhypokus.moments.Entity.Moment
+import sk.upjs.druhypokus.moments.Entity.MomentTagCrossRef
+import sk.upjs.druhypokus.moments.Entity.MomentWithTags
+import sk.upjs.druhypokus.moments.Entity.Tag
+import sk.upjs.druhypokus.moments.Entity.TagWithMoments
 
 @Dao
 interface Moment_Tag_Dao {
@@ -25,7 +29,7 @@ interface Moment_Tag_Dao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMoment(moment: Moment)
+    suspend fun insertMoment(moment: Moment) : Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTag(tag: Tag)

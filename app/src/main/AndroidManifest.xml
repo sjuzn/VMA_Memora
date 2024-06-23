@@ -24,15 +24,19 @@
         android:theme="@style/Theme.DruhyPokus"
         tools:targetApi="31">
         <activity
+            android:screenOrientation="portrait"
             android:name=".moments.ui.ShowMomentActivity"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".moments.ui.MapaActivity"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".moments.ui.AddTagActivity"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".moments.ui.AddMomentActivity"
             android:exported="false" />
 
@@ -49,12 +53,14 @@
         </receiver>
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".milniky.crud.MilestonesAkcieActivity"
             android:exported="false" />
 
         <service android:name=".main.BackgroundSoundService" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".main.AppStart"
             android:exported="true">
             <intent-filter>
@@ -64,9 +70,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".intro.IntroSliderActivity"
             android:exported="false" />
     </application>

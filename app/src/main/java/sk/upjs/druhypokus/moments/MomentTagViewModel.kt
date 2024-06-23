@@ -1,12 +1,18 @@
 package sk.upjs.druhypokus.moments
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import sk.upjs.druhypokus.moments.Entity.Moment
+import sk.upjs.druhypokus.moments.Entity.MomentTagCrossRef
+import sk.upjs.druhypokus.moments.Entity.MomentWithTags
+import sk.upjs.druhypokus.moments.Entity.Tag
+import sk.upjs.druhypokus.moments.Entity.TagWithMoments
 
 class MomentTagViewModel(private val repository: MomentTagRepository) : ViewModel() {
 
@@ -21,8 +27,9 @@ class MomentTagViewModel(private val repository: MomentTagRepository) : ViewMode
         return repository.getMomentSTagmi(moment).asLiveData()
     }
 
-    fun insertMoment(moment: Moment) {
-        viewModelScope.launch {
+    // Return -1 ked je daco zle
+    suspend fun insertMoment(moment: Moment): Long {
+        return withContext(Dispatchers.IO) {
             repository.insertMoment(moment)
         }
     }
@@ -57,7 +64,8 @@ class MomentTagViewModel(private val repository: MomentTagRepository) : ViewMode
         }
     }
 
-    class MomentTagViewModelFactory(private val repository: MomentTagRepository) : ViewModelProvider.Factory {
+    class MomentTagViewModelFactory(private val repository: MomentTagRepository) :
+        ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MomentTagViewModel::class.java)) {
                 return MomentTagViewModel(repository) as T

@@ -18,12 +18,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import sk.upjs.druhypokus.R
 import sk.upjs.druhypokus.main.MemoraApplication
-import sk.upjs.druhypokus.moments.Moment
-import sk.upjs.druhypokus.moments.MomentTagCrossRef
+import sk.upjs.druhypokus.moments.Entity.Moment
+import sk.upjs.druhypokus.moments.Entity.MomentTagCrossRef
 import sk.upjs.druhypokus.moments.MomentTagViewModel
-import sk.upjs.druhypokus.moments.Tag
+import sk.upjs.druhypokus.moments.Entity.Tag
 import java.text.SimpleDateFormat
 import java.util.ArrayList
 import java.util.Calendar
@@ -105,22 +107,28 @@ class AddMomentActivity : AppCompatActivity() {
 
             } else {
 
-                val moment = Moment(
-                    title,
-                    poznamka,
-                    fotka,
-                    datum,
-                    latitude,
-                    longitude,
-                    0
-                )
-                momentTagViewModel.insertMoment(moment)
-                for (t in selectedTags) {
-                    momentTagViewModel.insertTag(Tag(t))
-                    momentTagViewModel.insertMomentTagCrossRef(MomentTagCrossRef(moment.idMoment,t))
-                }
+                lifecycleScope.launch {
+                    val moment = Moment(
+                        title,
+                        poznamka,
+                        fotka,
+                        datum,
+                        latitude,
+                        longitude,
+                        0 // Initially 0, as it will be set by the database
+                    )
 
-                finish()
+                    val momentId = momentTagViewModel.insertMoment(moment)
+                    if (momentId != -1L) {
+                        for (t in selectedTags) {
+                            momentTagViewModel.insertTag(Tag(t))
+                            momentTagViewModel.insertMomentTagCrossRef(MomentTagCrossRef(momentId.toInt(), t))
+                        }
+                    } else {
+                        Log.e("Chyba", "Daco sa zase fest pokazilo a nezapisali sa data")
+                    }
+                    finish()
+                }
             }
         }
 

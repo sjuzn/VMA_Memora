@@ -1,4 +1,4 @@
-package sk.upjs.druhypokus.moments
+package sk.upjs.druhypokus.moments.Entity
 
 // zdroj https://www.youtube.com/watch?v=AHn5JQVlJJM
 

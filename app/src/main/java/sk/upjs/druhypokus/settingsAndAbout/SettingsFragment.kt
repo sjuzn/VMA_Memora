@@ -39,6 +39,12 @@ class SettingsFragment : Fragment() {
 
         menoSharedPref.text = PrefSingleton.getInstance().getPreferenceString("meno")
 
+        textView5.text = if(PrefSingleton.getInstance().getPreferenceBoolean("hudba")){
+            getString(R.string.turn_on_music)
+        }else{
+            getString(R.string.turn_off_music)
+        }
+
         reminderTimeCaps.setOnClickListener{
             Toast.makeText(requireContext(), "Not yet implemented", Toast.LENGTH_SHORT).show()
         }
@@ -72,12 +78,6 @@ class SettingsFragment : Fragment() {
             builder.show()
         }
 
-        textView5.text = if(PrefSingleton.getInstance().getPreferenceBoolean("hudba")){
-            getString(R.string.turn_on_music)
-        }else{
-            getString(R.string.turn_off_music)
-        }
-
         vypZapHudba.setOnClickListener {
             //zapnuta
             if(PrefSingleton.getInstance().getPreferenceBoolean("hudba")){
@@ -94,41 +94,9 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        //zapnuta
-        if(PrefSingleton.getInstance().getPreferenceBoolean("hudba")){
-            textView5.text = getString(R.string.turn_on_music)
-        }else{
-            //vypnuta
-            textView5.text = getString(R.string.turn_off_music)
-        }
-
         return view
     }
-/*
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private fun showDialog() {
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_layout_reminder_settings, null)
-        val toggleButton = dialogView.findViewById<Switch>(R.id.toggleButton)
-        val timePicker = dialogView.findViewById<TimePicker>(R.id.timePicker)
-        timePicker.setIs24HourView(true)
 
-        val dialogBuilder = AlertDialog.Builder(requireContext())
-            .setView(dialogView)
-            .setTitle(getString(R.string.menu_settings))
-            .setPositiveButton("OK") { dialog, _ ->
-                val isOn = toggleButton.isChecked
-                val hour = timePicker.hour
-                val minute = timePicker.minute
-                // handle the settings values
-                dialog.dismiss()
-            }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-
-        dialogBuilder.create().show()
-    }
- */
     private fun changeLanguage(lang : String) {
        requireContext().getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags(lang)
     }

@@ -1,4 +1,4 @@
-package sk.upjs.druhypokus.moments
+package sk.upjs.druhypokus.moments.Entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
