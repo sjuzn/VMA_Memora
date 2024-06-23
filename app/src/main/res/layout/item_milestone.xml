@@ -7,6 +7,7 @@
     android:id="@+id/milestoneParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scaleType="centerCrop"
     android:background="@drawable/test">
 
 
@@ -16,7 +17,7 @@
         android:layout_height="wrap_content"
         android:padding="30dp"
         android:text="AA a BB"
-        android:textColor="@color/cervena_tmava"
+        android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/coAkedyText"
         app:layout_constraintStart_toStartOf="parent" />

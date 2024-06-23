@@ -128,7 +128,7 @@ class WelcomeFragment : Fragment() {
                     requireContext(), android.Manifest.permission.READ_MEDIA_IMAGES
                 ) == PackageManager.PERMISSION_GRANTED -> {
                     // mam povolenie
-                    currView.findViewById<ImageView>(R.id.imageView).setImageURI(Uri.parse(milestone.fotka))
+                    //currView.findViewById<ImageView>(R.id.imageView).setImageURI(Uri.parse(milestone.fotka))
                 }
 
                 shouldShowRequestPermissionRationale(android.Manifest.permission.READ_MEDIA_IMAGES) -> {
